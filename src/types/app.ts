@@ -1,7 +1,9 @@
 import type { LucideProps } from "lucide-react";
 import type { ElementType, RefAttributes } from "react";
+import type z from "zod";
 
 import type { Layer } from "@/lib/enums";
+import type { EnabledLayersSchema } from "@/schemas";
 
 import type { FiresData } from "./fires";
 import type { FloodsData } from "./floods";
@@ -52,3 +54,5 @@ export type LayerBoundsFetchFunction<L extends Layer> = (bounds: {
   nw: Coordinates;
   se: Coordinates;
 }) => Promisish<LayerLocation<L>[]>;
+
+export type EnabledLayers = z.infer<typeof EnabledLayersSchema>;

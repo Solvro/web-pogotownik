@@ -9,6 +9,10 @@ import { MapContext } from "@/hooks/use-map";
 import type { LayerFetchFunction } from "@/types/app";
 
 import { Layer } from "./enums";
+import {
+  getEnabledLayersFromCookie,
+  saveEnabledLayersToCookie,
+} from "./helpers/cookies";
 import { typedEntries } from "./helpers/typescript";
 import { getFireReports } from "./services/fires";
 import { getFloodWarnings } from "./services/floods";
@@ -31,13 +35,9 @@ export function MapContextProvider({ children }: { children: ReactNode }) {
   } | null>(null);
   const [distance, setDistance] = useState(100);
   const [zoom, setZoom] = useState(DEFAULT_MAP_ZOOM);
-  const [enabledLayers, setEnabledLayers] = useState<Record<Layer, boolean>>({
-    [Layer.Smog]: false,
-    [Layer.Fires]: false,
-    [Layer.Floods]: false,
-    [Layer.Shelters]: true,
-    [Layer.AEDs]: false,
-  });
+  const [enabledLayers, setEnabledLayers] = useState<Record<Layer, boolean>>(
+    () => getEnabledLayersFromCookie(),
+  );
 
   async function fetchLocations() {
     const layersToFetch = typedEntries(enabledLayers).filter(
@@ -76,10 +76,14 @@ export function MapContextProvider({ children }: { children: ReactNode }) {
   });
 
   function toggleLayer(layer: Layer) {
-    setEnabledLayers((previous) => ({
-      ...previous,
-      [layer]: !previous[layer],
-    }));
+    setEnabledLayers((previous) => {
+      const newEnabledLayers = {
+        ...previous,
+        [layer]: !previous[layer],
+      };
+      saveEnabledLayersToCookie(newEnabledLayers);
+      return newEnabledLayers;
+    });
   }
 
   return (
