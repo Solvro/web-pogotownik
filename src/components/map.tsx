@@ -9,7 +9,7 @@ import { useMap } from "@/hooks/use-map";
 import { Marker } from "./marker";
 
 export function LayersMap() {
-  const { locations, setCenter, setZoom } = useMap();
+  const { locations, setCenter, setBounds, setDistance, setZoom } = useMap();
 
   const defaultProps = {
     center: SKS_COORDINATES,
@@ -25,6 +25,8 @@ export function LayersMap() {
         options={{ fullscreenControl: false }}
         onChange={(event_) => {
           setCenter(event_.center);
+          setDistance((40_000 / 2 ** event_.zoom) * 2 * 1000);
+          setBounds({ nw: event_.bounds.nw, se: event_.bounds.se });
         }}
         onZoomAnimationEnd={(newZoom) => {
           if (typeof newZoom !== "number") {

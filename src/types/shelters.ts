@@ -44,8 +44,8 @@ export interface ShelterAttributes {
 export interface SheltersData {
   id: number;
   address: string;
-  capacity: string;
-  area: string;
+  capacity: number;
+  area: number;
   type: string;
   buildingType: string;
   purpose: string;
