@@ -146,7 +146,7 @@ export const getAirQuality: LayerFetchFunction<Layer.Smog> = async (
   options,
 ) => {
   const stations = await getAllSmogStations();
-  const closestStations = getClosestPoints(point, stations, count);
+  const closestStations = getClosestPoints(point, stations, options?.count);
   const quality = await Promise.all(
     closestStations.map(async (station) => ({
       lat: station.lat,
