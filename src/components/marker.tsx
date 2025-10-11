@@ -43,10 +43,16 @@ const LAYER_FORMATTERS: {
   [Layer.Fires]: (Icon, meta) => ({
     marker: (
       <div>
-        <Icon /> Wielkość pożaru: {meta.intensity}
+        <Icon
+          className={cn(
+            meta.intensity === 1 && "text-yellow-500",
+            meta.intensity === 2 && "text-orange-500",
+            meta.intensity >= 3 && "text-red-500",
+          )}
+        />
       </div>
     ),
-    tooltip: null,
+    tooltip: <div>Wielkość pożaru: {meta.intensity}</div>,
   }),
   [Layer.Floods]: (Icon) => ({
     marker: (
