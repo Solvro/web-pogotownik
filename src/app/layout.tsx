@@ -1,7 +1,11 @@
 import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
+import type { ReactNode } from "react";
 
-import { QueryProvider } from "@/lib/query-client";
+import { LayersSidebar } from "@/components/layer-sidebar";
+import { Navbar } from "@/components/navbar";
+import { Toaster } from "@/components/ui/sonner";
+import { Providers } from "@/lib/providers";
 import { cn } from "@/lib/utils";
 
 import "./globals.css";
@@ -19,15 +23,18 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: ReactNode;
 }>) {
   return (
     <html lang="en">
-      <QueryProvider>
-        <body className={cn(space_grotesk.variable, "font-sans antialiased")}>
-          {children}
-        </body>
-      </QueryProvider>
+      <body className={cn(space_grotesk.variable, "font-sans antialiased")}>
+        <Providers>
+          <Navbar />
+          <Toaster />
+          <LayersSidebar />
+          <main>{children}</main>
+        </Providers>
+      </body>
     </html>
   );
 }
