@@ -9,7 +9,7 @@ class FetchError extends Error {
 }
 
 export async function fetchQuery<T>(url: string, options: RequestInit) {
-  const response = await fetch(url, { mode: "no-cors", ...options });
+  const response = await fetch(url, options);
   if (!response.ok) {
     throw new FetchError(
       `Failed to fetch ${url}: ${response.statusText}`,

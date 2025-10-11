@@ -1,3 +1,5 @@
+"use server";
+
 import { SERVICE_API_URLS } from "@/config/constants";
 import type { Coordinates, LayerLocation } from "@/types/app";
 import type {
