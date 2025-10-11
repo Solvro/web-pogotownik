@@ -48,7 +48,6 @@ export function ClusterMarker({
   points,
   onClick,
 }: ClusterMarkerProps) {
-  // If it's just one point, render the original marker
   if (pointCount === 1 && points.length > 0) {
     const { layerLocation } = points[0].properties;
     return (
