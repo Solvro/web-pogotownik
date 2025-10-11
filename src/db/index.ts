@@ -6,7 +6,7 @@ import { env } from "@/env";
 // eslint-disable-next-line import/no-default-export
 export default drizzle({
   connection: {
-    connectionString: env.DATABASE_URL,
+    connectionString: env.DATABASE_URI,
     ssl: false,
   },
 });
