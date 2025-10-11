@@ -1,7 +1,4 @@
-import type { Coordinates } from "./app";
-
-export interface FireReport {
-  coordinates: Coordinates;
+export interface FiresData {
   intensity: number;
   reportedAt: Date;
 }

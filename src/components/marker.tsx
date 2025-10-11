@@ -12,6 +12,7 @@ const LAYER_FORMATTERS: Partial<{
   [L in Layer]: (meta: LayerMetadata[L]) => ReactNode;
 }> = {
   [Layer.Smog]: (meta) => <div>Jakość powietrza: {meta.airQuality.value}</div>,
+  [Layer.Fires]: (meta) => <div>Wielkość pożaru: {meta.intensity}</div>,
 };
 
 export function Marker<T extends Layer>({

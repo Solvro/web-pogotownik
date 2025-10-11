@@ -10,11 +10,12 @@ import type { LayerFetchFunction } from "@/types/app";
 
 import { Layer } from "./enums";
 import { typedEntries } from "./helpers/typescript";
+import { getFireReports } from "./services/fires";
 import { getAirQuality } from "./services/smog";
 
 export const LAYER_FETCH_FUNCTIONS: { [L in Layer]: LayerFetchFunction<L> } = {
   [Layer.Smog]: getAirQuality,
-  [Layer.Fires]: () => [],
+  [Layer.Fires]: getFireReports,
   [Layer.Floods]: () => [],
   [Layer.Shelters]: () => [],
   [Layer.AEDs]: () => [],
@@ -25,7 +26,7 @@ export function MapContextProvider({ children }: { children: ReactNode }) {
   const [zoom, setZoom] = useState(2);
   const [enabledLayers, setEnabledLayers] = useState<Record<Layer, boolean>>({
     [Layer.Smog]: true,
-    [Layer.Fires]: false,
+    [Layer.Fires]: true,
     [Layer.Floods]: false,
     [Layer.Shelters]: false,
     [Layer.AEDs]: false,
