@@ -20,9 +20,8 @@ export function LayersMap() {
     bounds,
   } = useMap();
 
-  // Use clustering for better performance
   const { clusters } = useClustering(locations, zoom, bounds, {
-    radius: zoom < 12 ? 50 : 30, // Adjust cluster radius based on zoom
+    radius: zoom < 12 ? 50 : 30,
     maxZoom: 16,
   });
 
