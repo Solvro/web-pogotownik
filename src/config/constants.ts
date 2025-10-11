@@ -15,6 +15,9 @@ export const SERVICE_API_URLS = {
   [Layer.Fires]: {
     satelliteData: "https://firms.modaps.eosdis.nasa.gov/api/area/csv",
   },
+  [Layer.Floods]: {
+    stations: "https://danepubliczne.imgw.pl/api/data/hydro/",
+  },
 };
 
 export const EARTH_RADIUS_KM = 6371;

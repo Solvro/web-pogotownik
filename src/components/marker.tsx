@@ -52,13 +52,19 @@ const LAYER_FORMATTERS: {
     ),
     tooltip: <div>Wielkość pożaru: {meta.intensity}</div>,
   }),
-  [Layer.Floods]: (Icon) => ({
+  [Layer.Floods]: (Icon, meta) => ({
     marker: (
       <div>
-        <Icon /> Powódź
+        <Icon
+          className={cn(
+            meta.warningLevel === 1 && "text-blue-400",
+            meta.warningLevel === 2 && "text-blue-600",
+            meta.warningLevel >= 3 && "text-blue-700",
+          )}
+        />
       </div>
     ),
-    tooltip: null,
+    tooltip: <div>Stopień zagrożenia: {meta.warningLevel}</div>,
   }),
   [Layer.Shelters]: (Icon, meta) => ({
     marker: (

@@ -11,13 +11,14 @@ import type { LayerFetchFunction } from "@/types/app";
 import { Layer } from "./enums";
 import { typedEntries } from "./helpers/typescript";
 import { getFireReports } from "./services/fires";
+import { getFloodWarnings } from "./services/floods";
 import { getShelters } from "./services/shelters";
 import { getAirQuality } from "./services/smog";
 
 export const LAYER_FETCH_FUNCTIONS: { [L in Layer]: LayerFetchFunction<L> } = {
   [Layer.Smog]: getAirQuality,
   [Layer.Fires]: getFireReports,
-  [Layer.Floods]: () => [],
+  [Layer.Floods]: getFloodWarnings,
   [Layer.Shelters]: getShelters,
   [Layer.AEDs]: () => [],
 };
