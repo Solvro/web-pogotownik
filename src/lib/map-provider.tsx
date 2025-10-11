@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import type { ReactNode } from "react";
 
-import { SKS_COORDINATES } from "@/config/constants";
+import { DEFAULT_MAP_ZOOM, SKS_COORDINATES } from "@/config/constants";
 import { MapContext } from "@/hooks/use-map";
 import type { LayerFetchFunction } from "@/types/app";
 
@@ -30,7 +30,7 @@ export function MapContextProvider({ children }: { children: ReactNode }) {
     se: { lat: number; lng: number };
   } | null>(null);
   const [distance, setDistance] = useState(100);
-  const [zoom, setZoom] = useState(2);
+  const [zoom, setZoom] = useState(DEFAULT_MAP_ZOOM);
   const [enabledLayers, setEnabledLayers] = useState<Record<Layer, boolean>>({
     [Layer.Smog]: false,
     [Layer.Fires]: false,
