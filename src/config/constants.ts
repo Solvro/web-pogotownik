@@ -21,3 +21,6 @@ export const SERVICE_API_URLS = {
 };
 
 export const EARTH_RADIUS_KM = 6371;
+
+export const DEFAULT_MAP_ZOOM = 14;
+export const MAX_MAP_ZOOM = 20;

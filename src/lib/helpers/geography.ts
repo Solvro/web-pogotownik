@@ -35,3 +35,7 @@ export function getClosestPoints<T extends Coordinates>(
     .toSorted((a, b) => a.distance - b.distance)
     .slice(0, count);
 }
+
+/** Calculates the visible distance in meters for a given map zoom level. */
+export const calculateDistance = (zoomLevel: number) =>
+  (40_000 / 2 ** zoomLevel) * 2 * 1000;
