@@ -1,16 +1,15 @@
 import type { LucideProps } from "lucide-react";
-import type { ElementType, ReactNode, RefAttributes } from "react";
+import type { ElementType, RefAttributes } from "react";
 
 import type { Layer } from "@/lib/enums";
 
+import type { Promisish } from "./helpers";
 import type { AirQualityData } from "./smog";
 
 export interface Coordinates {
   lat: number;
   lng: number;
 }
-
-export type SynchronousReactNode = Exclude<ReactNode, Promise<ReactNode>>;
 
 export interface LayerMetadata {
   [Layer.Smog]: AirQualityData;
@@ -20,10 +19,19 @@ export interface LayerMetadata {
   [Layer.AEDs]: null;
 }
 
-export type LayerLocation<L extends Layer> = Coordinates & {
+export interface LayerLocation<L extends Layer> extends Coordinates {
   meta: LayerMetadata[L];
-};
+}
+
+export interface LabelledLayerLocation<L extends Layer>
+  extends LayerLocation<L> {
+  layer: L;
+}
 
 export type IconElementType = ElementType<
   Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>
 >;
+
+export type LayerFetchFunction<L extends Layer> = (
+  center: Coordinates,
+) => Promisish<LayerLocation<L>[]>;

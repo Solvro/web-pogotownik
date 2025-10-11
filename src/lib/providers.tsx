@@ -4,7 +4,7 @@ import { SidebarProvider } from "@/components/ui/sidebar";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryProvider } from "@/lib/query-client";
 
-import { MapContextProvider } from "./map-context";
+import { MapContextProvider } from "./map-provider";
 
 export function Providers({ children }: { children: ReactNode }) {
   return (

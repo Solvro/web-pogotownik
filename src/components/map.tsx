@@ -5,18 +5,11 @@ import GoogleMapReact from "google-map-react";
 import { SKS_COORDINATES } from "@/config/constants";
 import { env } from "@/env";
 import { useMap } from "@/hooks/use-map";
-import type { Layer } from "@/lib/enums";
-import { typedEntries } from "@/lib/helpers/typescript";
-import type { LayerLocation, SynchronousReactNode } from "@/types/app";
 
 import { Marker } from "./marker";
 
-export function LayersMap({
-  locations,
-}: {
-  locations: { [L in Layer]: LayerLocation<L>[] };
-}) {
-  const { enabledLayers } = useMap();
+export function LayersMap() {
+  const { locations, setCenter, setZoom } = useMap();
 
   const defaultProps = {
     center: SKS_COORDINATES,
@@ -30,26 +23,29 @@ export function LayersMap({
         defaultCenter={defaultProps.center}
         defaultZoom={defaultProps.zoom}
         options={{ fullscreenControl: false }}
+        onChange={(event_) => {
+          setCenter(event_.center);
+        }}
+        onZoomAnimationEnd={(newZoom) => {
+          if (typeof newZoom !== "number") {
+            console.error(
+              "Unknown zoom argument type",
+              typeof newZoom,
+              newZoom,
+            );
+          }
+          setZoom(newZoom as number);
+        }}
       >
-        {typedEntries(enabledLayers).reduce<SynchronousReactNode[]>(
-          (markers, [layer, isEnabled]) => {
-            if (isEnabled) {
-              markers.push(
-                ...locations[layer].map(({ lat, lng, meta }) => (
-                  <Marker
-                    layer={layer}
-                    key={`${layer}-marker-${String(lat)}-${String(lng)}}`}
-                    lat={lat}
-                    lng={lng}
-                    meta={meta}
-                  />
-                )),
-              );
-            }
-            return markers;
-          },
-          [],
-        )}
+        {locations.map(({ layer, lat, lng, meta }) => (
+          <Marker
+            layer={layer}
+            key={`${layer}-marker-${String(lat)}-${String(lng)}}`}
+            lat={lat}
+            lng={lng}
+            meta={meta}
+          />
+        ))}
       </GoogleMapReact>
     </div>
   );
