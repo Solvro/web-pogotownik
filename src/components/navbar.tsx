@@ -1,6 +1,7 @@
 "use client";
 
 import { Backpack, Compass, Megaphone, Search } from "lucide-react";
+import Link from "next/link";
 
 import { SidebarTrigger } from "@/components/ui/sidebar";
 
@@ -19,7 +20,11 @@ export function Navbar() {
         /> */}
         <div className="grid w-full grid-cols-3 items-center gap-3">
           <h1 className="text-2xl font-bold tracking-tighter">
-            <AuroraText colors={["#3b82f6", "#e11d48"]}>Pogotownik</AuroraText>
+            <Link href="/">
+              <AuroraText colors={["#3b82f6", "#e11d48"]}>
+                Pogotownik
+              </AuroraText>
+            </Link>
           </h1>
 
           <div>
@@ -45,8 +50,10 @@ export function Navbar() {
               <Button variant="white">
                 <Megaphone /> Report
               </Button>
-              <Button variant="white">
-                <Backpack /> Plecak
+              <Button variant="white" asChild>
+                <Link href="/plecak">
+                  <Backpack /> Plecak
+                </Link>
               </Button>
               <ButtonGroupSeparator />
               <Button size="icon" asChild variant="white">
