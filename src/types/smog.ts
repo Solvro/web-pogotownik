@@ -141,7 +141,7 @@ export interface SanitizedAirQualityMeasuringStation {
 }
 
 interface IndexMetadata {
-  calculatedAt: Date;
+  calculatedAt: Date | null;
   value: number | null;
   categoryName: string | null;
 }
