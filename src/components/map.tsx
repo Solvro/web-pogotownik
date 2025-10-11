@@ -7,14 +7,14 @@ import { env } from "@/env";
 import { useMap } from "@/hooks/use-map";
 import type { Layer } from "@/lib/enums";
 import { typedEntries } from "@/lib/helpers/typescript";
-import type { Coordinates, SynchronousReactNode } from "@/types/app";
+import type { LayerLocation, SynchronousReactNode } from "@/types/app";
 
 import { Marker } from "./marker";
 
 export function LayersMap({
   locations,
 }: {
-  locations: Record<Layer, Coordinates[]>;
+  locations: { [L in Layer]: LayerLocation<L>[] };
 }) {
   const { enabledLayers } = useMap();
 
@@ -34,12 +34,13 @@ export function LayersMap({
           (markers, [layer, isEnabled]) => {
             if (isEnabled) {
               markers.push(
-                ...locations[layer].map(({ lat, lng }) => (
+                ...locations[layer].map(({ lat, lng, meta }) => (
                   <Marker
                     layer={layer}
                     key={`${layer}-marker-${String(lat)}-${String(lng)}}`}
                     lat={lat}
                     lng={lng}
+                    meta={meta}
                   />
                 )),
               );

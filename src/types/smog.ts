@@ -153,3 +153,8 @@ export interface SanitizedAirQualityIndex extends IndexMetadata {
   pm25: IndexMetadata;
   o3: IndexMetadata;
 }
+
+export interface AirQualityData {
+  station: SanitizedAirQualityMeasuringStation;
+  airQuality: SanitizedAirQualityIndex;
+}

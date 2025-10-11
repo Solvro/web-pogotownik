@@ -1,9 +1,9 @@
 import { Flame, SquareActivity, Warehouse, Waves, Wind } from "lucide-react";
-import type { ElementType } from "react";
 
 import { Layer } from "@/lib/enums";
+import type { IconElementType } from "@/types/app";
 
-export const LAYER_ICONS: Record<Layer, ElementType> = {
+export const LAYER_ICONS: Record<Layer, IconElementType> = {
   [Layer.Smog]: Wind,
   [Layer.Fires]: Flame,
   [Layer.Floods]: Waves,
