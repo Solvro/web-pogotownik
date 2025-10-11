@@ -4,6 +4,7 @@ import type { ElementType, RefAttributes } from "react";
 import type { Layer } from "@/lib/enums";
 
 import type { FiresData } from "./fires";
+import type { FloodsData } from "./floods";
 import type { Promisish } from "./helpers";
 import type { SheltersData } from "./shelters";
 import type { AirQualityData } from "./smog";
@@ -16,7 +17,7 @@ export interface Coordinates {
 export interface LayerMetadata {
   [Layer.Smog]: AirQualityData;
   [Layer.Fires]: FiresData;
-  [Layer.Floods]: null;
+  [Layer.Floods]: FloodsData;
   [Layer.Shelters]: SheltersData;
   [Layer.AEDs]: null;
 }
