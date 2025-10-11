@@ -4,11 +4,21 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import type { ReactNode } from "react";
 
-import { LAYER_FETCH_FUNCTIONS, SKS_COORDINATES } from "@/config/constants";
+import { SKS_COORDINATES } from "@/config/constants";
 import { MapContext } from "@/hooks/use-map";
+import type { LayerFetchFunction } from "@/types/app";
 
 import { Layer } from "./enums";
 import { typedEntries } from "./helpers/typescript";
+import { getAirQuality } from "./services/smog";
+
+export const LAYER_FETCH_FUNCTIONS: { [L in Layer]: LayerFetchFunction<L> } = {
+  [Layer.Smog]: getAirQuality,
+  [Layer.Fires]: () => [],
+  [Layer.Floods]: () => [],
+  [Layer.Shelters]: () => [],
+  [Layer.AEDs]: () => [],
+};
 
 export function MapContextProvider({ children }: { children: ReactNode }) {
   const [center, setCenter] = useState(SKS_COORDINATES);
