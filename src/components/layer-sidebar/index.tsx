@@ -17,10 +17,14 @@ import { LayerToggle } from "./toggle";
 
 export function LayersSidebar() {
   return (
-    <Sidebar variant="floating" side="right">
-      <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupLabel className="flex gap-2">
+    <Sidebar
+      variant="floating"
+      side="right"
+      className="top-24 right-10 h-[calc(100vh-15rem)]"
+    >
+      <SidebarContent className="bg-transparent">
+        <SidebarGroup className="bg-transparent">
+          <SidebarGroupLabel className="flex gap-2 text-black">
             Warstwy <Layers size={8} />
           </SidebarGroupLabel>
           <SidebarGroupContent>

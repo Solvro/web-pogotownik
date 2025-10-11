@@ -11,7 +11,7 @@ export function Providers({ children }: { children: ReactNode }) {
     <QueryProvider>
       <MapContextProvider>
         <TooltipProvider>
-          <SidebarProvider defaultOpen={false}>{children}</SidebarProvider>
+          <SidebarProvider>{children}</SidebarProvider>
         </TooltipProvider>
       </MapContextProvider>
     </QueryProvider>

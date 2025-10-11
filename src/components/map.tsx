@@ -29,6 +29,7 @@ export function LayersMap({
         bootstrapURLKeys={{ key: env.NEXT_PUBLIC_GOOGLE_MAPS_KEY }}
         defaultCenter={defaultProps.center}
         defaultZoom={defaultProps.zoom}
+        options={{ fullscreenControl: false }}
       >
         {typedEntries(enabledLayers).reduce<SynchronousReactNode[]>(
           (markers, [layer, isEnabled]) => {
