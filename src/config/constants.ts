@@ -1,5 +1,5 @@
 import { Layer } from "@/lib/enums";
-import type { Coordinates } from "@/types/app";
+import type { Coordinates, EnabledLayers } from "@/types/app";
 
 export const SKS_COORDINATES: Coordinates = {
   lat: 51.108_912_865_073_506,
@@ -24,3 +24,12 @@ export const EARTH_RADIUS_KM = 6371;
 
 export const DEFAULT_MAP_ZOOM = 14;
 export const MAX_MAP_ZOOM = 20;
+export const ENABLED_LAYERS_COOKIE_NAME = "pogotownik_enabled_layers";
+
+export const DEFAULT_ENABLED_LAYERS: EnabledLayers = {
+  [Layer.Smog]: false,
+  [Layer.Fires]: false,
+  [Layer.Floods]: false,
+  [Layer.Shelters]: false,
+  [Layer.AEDs]: false,
+};
