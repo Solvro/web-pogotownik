@@ -8,8 +8,6 @@ import type {
 } from "@/types/app";
 import type { SynchronousReactNode } from "@/types/helpers";
 
-import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
-
 const LAYER_FORMATTERS: {
   [L in Layer]: (
     icon: IconElementType,
@@ -62,10 +60,17 @@ const LAYER_FORMATTERS: {
     ),
     tooltip: null,
   }),
-  [Layer.Shelters]: (Icon) => ({
+  [Layer.Shelters]: (Icon, meta) => ({
     marker: (
       <div>
-        <Icon /> Schron
+        <Icon
+          className={cn(
+            "size-3",
+            meta.buildingType.includes("[3]") && "text-green-500",
+            meta.buildingType.includes("[2]") && "text-blue-500",
+            meta.buildingType.includes("[1]") && "text-red-500",
+          )}
+        />
       </div>
     ),
     tooltip: null,
@@ -85,11 +90,12 @@ export function Marker<T extends Layer>({
   meta,
 }: { layer: T } & LayerLocation<T>) {
   const formatter = LAYER_FORMATTERS[layer];
-  const { marker, tooltip } = formatter(LAYER_ICONS[layer], meta);
-  return (
-    <Tooltip>
-      <TooltipTrigger>{marker}</TooltipTrigger>
-      <TooltipContent>{tooltip}</TooltipContent>
-    </Tooltip>
-  );
+  const { marker } = formatter(LAYER_ICONS[layer], meta);
+  // (
+  //   <Tooltip>
+  //     <TooltipTrigger>{marker}</TooltipTrigger>
+  //     <TooltipContent>{tooltip}</TooltipContent>
+  //   </Tooltip>
+  // )
+  return marker;
 }

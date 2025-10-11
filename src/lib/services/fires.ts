@@ -82,10 +82,9 @@ export async function fetchFireData() {
 
 export async function getFireReports(
   point: Coordinates,
-  count?: number,
 ): Promise<LayerLocation<Layer.Fires>[]> {
   const reports = await fetchFireData();
-  const closestReport = getClosestPoints(point, reports, count);
+  const closestReport = getClosestPoints(point, reports);
   return closestReport.map((report) => ({
     lat: report.lat,
     lng: report.lng,
