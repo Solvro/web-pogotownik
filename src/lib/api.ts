@@ -8,7 +8,11 @@ class FetchError extends Error {
   }
 }
 
-export async function fetchQuery<T>(url: string, options: RequestInit) {
+export async function fetchQuery<T>(
+  url: string,
+  options: RequestInit,
+  isJson = true,
+) {
   const response = await fetch(url, options);
   if (!response.ok) {
     throw new FetchError(
@@ -16,6 +20,10 @@ export async function fetchQuery<T>(url: string, options: RequestInit) {
       response,
     );
   }
-  const data = (await response.json()) as T;
+
+  const data = isJson
+    ? ((await response.json()) as T)
+    : ((await response.text()) as T);
+
   return data;
 }

@@ -12,6 +12,9 @@ export const SERVICE_API_URLS = {
       "https://api.gios.gov.pl/pjp-api/v1/rest/station/findAll?size=1000",
     airQuality: "https://api.gios.gov.pl/pjp-api/v1/rest/aqindex/getIndex",
   },
+  [Layer.Fires]: {
+    satelliteData: "https://firms.modaps.eosdis.nasa.gov/api/area/csv",
+  },
 };
 
 export const EARTH_RADIUS_KM = 6371;
