@@ -1,7 +1,7 @@
 export enum Layer {
-  Smog = "Smog",
+  Shelters = "Schrony",
+  Smog = "Jakość powietrza",
   Fires = "Pożary",
   Floods = "Powodzie",
-  Shelters = "Schrony",
   AEDs = "AED",
 }
