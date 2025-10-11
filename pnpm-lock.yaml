@@ -10,6 +10,9 @@ importers:
       "@radix-ui/react-slot":
         specifier: ^1.2.3
         version: 1.2.3(@types/react@19.2.2)(react@19.2.0)
+      "@t3-oss/env-nextjs":
+        specifier: ^0.13.8
+        version: 0.13.8(typescript@5.9.3)(zod@4.1.12)
       "@tanstack/react-query":
         specifier: ^5.90.2
         version: 5.90.2(react@19.2.0)
@@ -19,6 +22,9 @@ importers:
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
+      google-map-react:
+        specifier: ^2.2.5
+        version: 2.2.5(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       lucide-react:
         specifier: ^0.544.0
         version: 0.544.0(react@19.2.0)
@@ -37,6 +43,9 @@ importers:
       tw-animate-css:
         specifier: ^1.4.0
         version: 1.4.0
+      zod:
+        specifier: ^4.1.12
+        version: 4.1.12
     devDependencies:
       "@eslint/eslintrc":
         specifier: ^3
@@ -53,6 +62,9 @@ importers:
       "@trivago/prettier-plugin-sort-imports":
         specifier: ^5.2.2
         version: 5.2.2(prettier@3.6.2)
+      "@types/google-map-react":
+        specifier: ^2.1.10
+        version: 2.1.10
       "@types/node":
         specifier: ^22
         version: 22.18.9
@@ -342,6 +354,12 @@ packages:
       }
     engines: { node: ^18.18.0 || ^20.9.0 || >=21.1.0 }
 
+  "@googlemaps/js-api-loader@1.16.10":
+    resolution:
+      {
+        integrity: sha512-c2erv2k7P2ilYzMmtYcMgAR21AULosQuUHJbStnrvRk2dG93k5cqptDrh9A8p+ZNlyhiqEOgHW7N9PAizdUM7Q==,
+      }
+
   "@humanfs/core@0.19.1":
     resolution:
       {
@@ -624,6 +642,12 @@ packages:
         integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==,
       }
 
+  "@mapbox/point-geometry@0.1.0":
+    resolution:
+      {
+        integrity: sha512-6j56HdLTwWGO0fJPlrZtdU/B13q8Uwmo18Ck2GnGgN9PCFyKTZ3UbXeEdRFh18i9XQ92eH2VdtpJHpBD3aripQ==,
+      }
+
   "@napi-rs/wasm-runtime@0.2.12":
     resolution:
       {
@@ -824,6 +848,46 @@ packages:
         integrity: sha512-JQ5TuMi45Owi4/BIMAJBoSQoOJu12oOk/gADqlcUL9JEdHB8vyjUSsxqeNXnmXHjYKMi2WcYtezGEEhqUI/E2g==,
       }
 
+  "@t3-oss/env-core@0.13.8":
+    resolution:
+      {
+        integrity: sha512-L1inmpzLQyYu4+Q1DyrXsGJYCXbtXjC4cICw1uAKv0ppYPQv656lhZPU91Qd1VS6SO/bou1/q5ufVzBGbNsUpw==,
+      }
+    peerDependencies:
+      arktype: ^2.1.0
+      typescript: ">=5.0.0"
+      valibot: ^1.0.0-beta.7 || ^1.0.0
+      zod: ^3.24.0 || ^4.0.0-beta.0
+    peerDependenciesMeta:
+      arktype:
+        optional: true
+      typescript:
+        optional: true
+      valibot:
+        optional: true
+      zod:
+        optional: true
+
+  "@t3-oss/env-nextjs@0.13.8":
+    resolution:
+      {
+        integrity: sha512-QmTLnsdQJ8BiQad2W2nvV6oUpH4oMZMqnFEjhVpzU0h3sI9hn8zb8crjWJ1Amq453mGZs6A4v4ihIeBFDOrLeQ==,
+      }
+    peerDependencies:
+      arktype: ^2.1.0
+      typescript: ">=5.0.0"
+      valibot: ^1.0.0-beta.7 || ^1.0.0
+      zod: ^3.24.0 || ^4.0.0-beta.0
+    peerDependenciesMeta:
+      arktype:
+        optional: true
+      typescript:
+        optional: true
+      valibot:
+        optional: true
+      zod:
+        optional: true
+
   "@tailwindcss/node@4.1.14":
     resolution:
       {
@@ -1014,6 +1078,12 @@ packages:
     resolution:
       {
         integrity: sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w==,
+      }
+
+  "@types/google-map-react@2.1.10":
+    resolution:
+      {
+        integrity: sha512-8/0UllZS7tF08WNBRPQlSJCkETvz3e3sZoPxzDaWkj2iV5dmFSnOKXVtoeKo8dLZSe+RkLn479t1wj6nXmLLSA==,
       }
 
   "@types/json-schema@7.0.15":
@@ -2253,6 +2323,12 @@ packages:
       }
     engines: { node: ">=0.10.0" }
 
+  eventemitter3@4.0.7:
+    resolution:
+      {
+        integrity: sha512-8guHBZCwKnFhYdHr2ysuRWErTwhoN2X8XELRlrRwpmfeY2jjuUN4taQMsULKUVo1K4DvZl+0pgfyoysHxvmvEw==,
+      }
+
   eventemitter3@5.0.1:
     resolution:
       {
@@ -2518,6 +2594,16 @@ packages:
       {
         integrity: sha512-uHJgbwAMwNFf5mLst7IWLNg14x1CkeqglJb/K3doi4dw6q2IvAAmM/Y81kevy83wP+Sst+nutFTYOGg3d1lsxg==,
       }
+
+  google-map-react@2.2.5:
+    resolution:
+      {
+        integrity: sha512-6n4pb4Ckmt3TnvJ5fNPSu2kceIItMrJR413YfX89tNq95nTipFwxL2lmeR+IHFl1cXzKpFvQ4leXzJza0LlapA==,
+      }
+    engines: { node: ">=10" }
+    peerDependencies:
+      react: ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
+      react-dom: ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
   gopd@1.2.0:
     resolution:
@@ -4427,6 +4513,12 @@ packages:
       }
     engines: { node: ">=18" }
 
+  zod@4.1.12:
+    resolution:
+      {
+        integrity: sha512-JInaHOamG8pt5+Ey8kGmdcAcg3OL9reK8ltczgHTAwNhMys/6ThXHityHxVV2p3fkw/c+MAvBHFVYHFZDmjMCQ==,
+      }
+
 snapshots:
   "@adonisjs/eslint-config@2.1.2(eslint@9.37.0(jiti@2.6.1))(prettier@3.6.2)(typescript@5.9.3)":
     dependencies:
@@ -4631,6 +4723,8 @@ snapshots:
       "@eslint/core": 0.16.0
       levn: 0.4.1
 
+  "@googlemaps/js-api-loader@1.16.10": {}
+
   "@humanfs/core@0.19.1": {}
 
   "@humanfs/node@0.16.7":
@@ -4768,6 +4862,8 @@ snapshots:
     dependencies:
       "@jridgewell/resolve-uri": 3.1.2
       "@jridgewell/sourcemap-codec": 1.5.5
+
+  "@mapbox/point-geometry@0.1.0": {}
 
   "@napi-rs/wasm-runtime@0.2.12":
     dependencies:
@@ -4925,6 +5021,18 @@ snapshots:
     dependencies:
       tslib: 2.8.1
 
+  "@t3-oss/env-core@0.13.8(typescript@5.9.3)(zod@4.1.12)":
+    optionalDependencies:
+      typescript: 5.9.3
+      zod: 4.1.12
+
+  "@t3-oss/env-nextjs@0.13.8(typescript@5.9.3)(zod@4.1.12)":
+    dependencies:
+      "@t3-oss/env-core": 0.13.8(typescript@5.9.3)(zod@4.1.12)
+    optionalDependencies:
+      typescript: 5.9.3
+      zod: 4.1.12
+
   "@tailwindcss/node@4.1.14":
     dependencies:
       "@jridgewell/remapping": 2.3.5
@@ -5034,6 +5142,10 @@ snapshots:
       "@types/node": 22.18.9
 
   "@types/estree@1.0.8": {}
+
+  "@types/google-map-react@2.1.10":
+    dependencies:
+      "@types/react": 19.2.2
 
   "@types/json-schema@7.0.15": {}
 
@@ -5961,6 +6073,8 @@ snapshots:
 
   esutils@2.0.3: {}
 
+  eventemitter3@4.0.7: {}
+
   eventemitter3@5.0.1: {}
 
   execa@9.6.0:
@@ -6128,6 +6242,15 @@ snapshots:
       gopd: 1.2.0
 
   globrex@0.1.2: {}
+
+  google-map-react@2.2.5(react-dom@19.2.0(react@19.2.0))(react@19.2.0):
+    dependencies:
+      "@googlemaps/js-api-loader": 1.16.10
+      "@mapbox/point-geometry": 0.1.0
+      eventemitter3: 4.0.7
+      prop-types: 15.8.1
+      react: 19.2.0
+      react-dom: 19.2.0(react@19.2.0)
 
   gopd@1.2.0: {}
 
@@ -7266,3 +7389,5 @@ snapshots:
   yocto-queue@0.1.0: {}
 
   yoctocolors@2.1.2: {}
+
+  zod@4.1.12: {}
