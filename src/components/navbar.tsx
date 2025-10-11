@@ -1,14 +1,14 @@
 "use client";
 
-import { Backpack, Compass, Megaphone, Search } from "lucide-react";
+import { Backpack, Megaphone } from "lucide-react";
 import Link from "next/link";
 
 import { SidebarTrigger } from "@/components/ui/sidebar";
 
+import { NavSearch } from "./nav-search";
 import { AuroraText } from "./ui/aurora-text";
 import { Button } from "./ui/button";
 import { ButtonGroup, ButtonGroupSeparator } from "./ui/button-group";
-import { InputGroup, InputGroupAddon, InputGroupInput } from "./ui/input-group";
 
 export function Navbar() {
   return (
@@ -28,21 +28,7 @@ export function Navbar() {
           </h1>
 
           <div>
-            <ButtonGroup className="w-full [--radius:9999rem]">
-              <ButtonGroup className="w-full">
-                <InputGroup className="bg-white">
-                  <InputGroupAddon>
-                    <Search />
-                  </InputGroupAddon>
-                  <InputGroupInput placeholder={"Dokąd się wybierasz?"} />
-                </InputGroup>
-              </ButtonGroup>
-              <ButtonGroup>
-                <Button variant="outline" size="icon">
-                  <Compass />
-                </Button>
-              </ButtonGroup>
-            </ButtonGroup>
+            <NavSearch />
           </div>
 
           <div className="flex justify-end">
