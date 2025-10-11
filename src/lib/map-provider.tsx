@@ -45,8 +45,19 @@ export function MapContextProvider({ children }: { children: ReactNode }) {
     const locations = await Promise.all(
       layersToFetch.map(async ([layer]) => {
         const fetchFunction = LAYER_FETCH_FUNCTIONS[layer];
+
+        // Adjust distance based on zoom level for better performance
+        let adjustedDistance = distance;
+        if (zoom < 10) {
+          // At lower zoom levels, reduce the search radius significantly
+          adjustedDistance = Math.min(distance, 1000);
+        } else if (zoom < 13) {
+          // At medium zoom levels, use moderate radius
+          adjustedDistance = Math.min(distance, 5000);
+        }
+
         const result = await fetchFunction(center, {
-          distance,
+          distance: adjustedDistance,
         });
 
         return result.map((location) => ({ ...location, layer }));
@@ -57,9 +68,10 @@ export function MapContextProvider({ children }: { children: ReactNode }) {
   }
 
   const query = useQuery({
-    queryKey: ["map", "locations", center, enabledLayers],
+    queryKey: ["map", "locations", center, enabledLayers, zoom, distance],
     queryFn: fetchLocations,
     refetchOnMount: true,
+    staleTime: zoom < 10 ? 30_000 : 10_000, // Keep data fresh longer at lower zoom levels
   });
 
   function toggleLayer(layer: Layer) {
