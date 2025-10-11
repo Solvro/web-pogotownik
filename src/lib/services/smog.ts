@@ -1,7 +1,7 @@
 "use server";
 
 import { SERVICE_API_URLS } from "@/config/constants";
-import type { Coordinates, LayerLocation } from "@/types/app";
+import type { LayerFetchFunction } from "@/types/app";
 import type {
   AirQualityIndexResponse,
   AirQualityMeasuringStationFindAllResponse,
@@ -141,10 +141,10 @@ async function getAirQualityAtStation(
 }
 
 /** Gets the air quality data based for the specified point based on the `count` nearest measurement stations. */
-export async function getAirQuality(
-  point: Coordinates,
-  count?: number,
-): Promise<LayerLocation<Layer.Smog>[]> {
+export const getAirQuality: LayerFetchFunction<Layer.Smog> = async (
+  point,
+  options,
+) => {
   const stations = await getAllSmogStations();
   const closestStations = getClosestPoints(point, stations, count);
   const quality = await Promise.all(
@@ -158,4 +158,4 @@ export async function getAirQuality(
     })),
   );
   return quality;
-}
+};

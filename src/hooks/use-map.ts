@@ -12,6 +12,10 @@ export interface MapContextValue {
   setCenter: (center: Coordinates) => void;
   zoom: number;
   setZoom: (zoom: number) => void;
+  bounds: { nw: Coordinates; se: Coordinates } | null;
+  setBounds: (bounds: { nw: Coordinates; se: Coordinates } | null) => void;
+  distance: number;
+  setDistance: (distance: number) => void;
   locations: LabelledLayerLocation<Layer>[];
 }
 
