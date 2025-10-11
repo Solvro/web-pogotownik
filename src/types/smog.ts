@@ -147,6 +147,8 @@ interface IndexMetadata {
 }
 
 export interface SanitizedAirQualityIndex extends IndexMetadata {
+  overallValue: number;
+  overallCategoryName: string;
   so2: IndexMetadata;
   no2: IndexMetadata;
   pm10: IndexMetadata;

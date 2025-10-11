@@ -12,7 +12,18 @@ import type {
 import { fetchQuery } from "../api";
 import { Layer } from "../enums";
 import { getClosestPoints } from "../helpers/geography";
-import { deserializeNullableDate } from "../helpers/transformations";
+import {
+  arrayAverage,
+  deserializeNullableDate,
+} from "../helpers/transformations";
+
+const VALUE_CATEGORY_NAMES = [
+  "Bardzo dobra",
+  "Dobra",
+  "Umiarkowana",
+  "Dostateczna",
+  "Zła",
+];
 
 let _allSmogStations: Promise<SanitizedAirQualityMeasuringStation[]> | null =
   null;
@@ -44,6 +55,22 @@ async function fetchAllSmogStations(): Promise<
   }));
 }
 
+function calculateOverallQuality(
+  data: Omit<SanitizedAirQualityIndex, "overallValue" | "overallCategoryName">,
+) {
+  const allValues = [
+    data.value,
+    data.so2.value,
+    data.no2.value,
+    data.pm10.value,
+    data.pm25.value,
+    data.o3.value,
+  ];
+  const values = allValues.filter((value) => value != null);
+  const average = arrayAverage(values);
+  return average;
+}
+
 async function getAllSmogStations(): Promise<
   SanitizedAirQualityMeasuringStation[]
 > {
@@ -63,7 +90,7 @@ async function getAirQualityAtStation(
     },
   });
   const indexData = data.AqIndex;
-  return {
+  const sanitized = {
     calculatedAt: new Date(indexData["Data wykonania obliczeń indeksu"]),
     value: indexData["Wartość indeksu"],
     categoryName: indexData["Nazwa kategorii indeksu"],
@@ -103,6 +130,14 @@ async function getAirQualityAtStation(
       categoryName: indexData["Nazwa kategorii indeksu dla wskażnika O3"],
     },
   };
+  const overallValue = calculateOverallQuality(sanitized);
+  const overallCategoryName =
+    VALUE_CATEGORY_NAMES[overallValue] ?? "Brak danych";
+  return {
+    ...sanitized,
+    overallValue,
+    overallCategoryName,
+  };
 }
 
 /** Gets the air quality data based for the specified point based on the `count` nearest measurement stations. */
@@ -112,7 +147,7 @@ export async function getAirQuality(
 ): Promise<LayerLocation<Layer.Smog>[]> {
   const stations = await getAllSmogStations();
   const closestStations = getClosestPoints(point, stations, count);
-  return await Promise.all(
+  const quality = await Promise.all(
     closestStations.map(async (station) => ({
       lat: station.lat,
       lng: station.lng,
@@ -122,4 +157,5 @@ export async function getAirQuality(
       },
     })),
   );
+  return quality;
 }
