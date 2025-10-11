@@ -4,16 +4,22 @@ import GoogleMapReact from "google-map-react";
 
 import { SKS_COORDINATES } from "@/config/constants";
 import { env } from "@/env";
+import { useMap } from "@/hooks/use-map";
+import type { Layer } from "@/lib/enums";
+import { typedEntries } from "@/lib/helpers/typescript";
+import type { Coordinates, SynchronousReactNode } from "@/types/app";
 
-function Marker({ text }: { text: string; lat: number; lng: number }) {
-  return <div>{text}</div>;
-}
+import { Marker } from "./marker";
 
-export function SimpleMap() {
-  const [lat, lng] = SKS_COORDINATES;
+export function LayersMap({
+  locations,
+}: {
+  locations: Record<Layer, Coordinates[]>;
+}) {
+  const { enabledLayers } = useMap();
 
   const defaultProps = {
-    center: { lat, lng },
+    center: SKS_COORDINATES,
     zoom: 14,
   };
 
@@ -24,7 +30,24 @@ export function SimpleMap() {
         defaultCenter={defaultProps.center}
         defaultZoom={defaultProps.zoom}
       >
-        <Marker lat={lat} lng={lng} text="Strefa Kultury Studenckiej" />
+        {typedEntries(enabledLayers).reduce<SynchronousReactNode[]>(
+          (markers, [layer, isEnabled]) => {
+            if (isEnabled) {
+              markers.push(
+                ...locations[layer].map(({ lat, lng }) => (
+                  <Marker
+                    layer={layer}
+                    key={`${layer}-marker-${String(lat)}-${String(lng)}}`}
+                    lat={lat}
+                    lng={lng}
+                  />
+                )),
+              );
+            }
+            return markers;
+          },
+          [],
+        )}
       </GoogleMapReact>
     </div>
   );
