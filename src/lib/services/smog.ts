@@ -1,4 +1,5 @@
 import { SERVICE_API_URLS } from "@/config/constants";
+import type { LayerLocation } from "@/types/app";
 import type {
   AirQualityIndexResponse,
   AirQualityMeasuringStationFindAllResponse,
@@ -89,18 +90,16 @@ async function getAirQualityAtStation(
   };
 }
 
-export async function getAirQuality(): Promise<
-  {
-    station: SanitizedAirQualityMeasuringStation;
-    airQuality: SanitizedAirQualityIndex;
-  }[]
-> {
+export async function getAirQuality(): Promise<LayerLocation<Layer.Smog>[]> {
   const stations = await getAllSmogStations();
-  const stationsWithAirQuality = await Promise.all(
+  return await Promise.all(
     stations.map(async (station) => ({
-      station,
-      airQuality: await getAirQualityAtStation(station.id),
+      lat: station.lat,
+      lng: station.lng,
+      meta: {
+        station,
+        airQuality: await getAirQualityAtStation(station.id),
+      },
     })),
   );
-  return stationsWithAirQuality;
 }

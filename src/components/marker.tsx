@@ -1,12 +1,29 @@
-import { LAYER_ICONS } from "@/config/icons";
-import type { Layer } from "@/lib/enums";
-import type { MarkerProps } from "@/types/app";
+import type { ReactNode } from "react";
 
-export function Marker({ layer }: { layer: Layer } & MarkerProps) {
-  const Icon = LAYER_ICONS[layer];
+import { LAYER_ICONS } from "@/config/icons";
+import { Layer } from "@/lib/enums";
+import type {
+  IconElementType,
+  LayerLocation,
+  LayerMetadata,
+} from "@/types/app";
+
+const LAYER_FORMATTERS: Partial<{
+  [L in Layer]: (meta: LayerMetadata[L]) => ReactNode;
+}> = {
+  [Layer.Smog]: (meta) => <div>Jakość powietrza: {meta.airQuality.value}</div>,
+};
+
+export function Marker<T extends Layer>({
+  layer,
+  meta,
+}: { layer: T } & LayerLocation<T>) {
+  const Icon: IconElementType = LAYER_ICONS[layer];
+  const formatter = LAYER_FORMATTERS[layer];
   return (
-    <div>
+    <div className="z-[200]">
       <Icon />
+      {formatter?.(meta)}
     </div>
   );
 }

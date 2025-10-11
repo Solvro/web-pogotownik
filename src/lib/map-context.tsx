@@ -9,7 +9,7 @@ import { Layer } from "./enums";
 
 export function MapContextProvider({ children }: { children: ReactNode }) {
   const [enabledLayers, setEnabledLayers] = useState<Record<Layer, boolean>>({
-    [Layer.Smog]: false,
+    [Layer.Smog]: true,
     [Layer.Fires]: false,
     [Layer.Floods]: false,
     [Layer.Shelters]: false,
