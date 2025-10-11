@@ -100,6 +100,7 @@ export function MapContextProvider({ children }: { children: ReactNode }) {
         distance,
         setDistance,
         locations: query.data ?? [],
+        isLoading: query.isLoading,
       }}
     >
       {children}

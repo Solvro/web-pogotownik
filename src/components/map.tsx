@@ -13,17 +13,19 @@ import { useMap } from "@/hooks/use-map";
 import { calculateDistance } from "@/lib/helpers/geography";
 
 import { ClusterMarker } from "./cluster-marker";
+import { Spinner } from "./ui/spinner";
 
 export function LayersMap() {
   const {
     center,
-    locations,
     setCenter,
+    zoom,
+    setZoom,
+    bounds,
     setBounds,
     setDistance,
-    setZoom,
-    zoom,
-    bounds,
+    locations,
+    isLoading,
   } = useMap();
 
   const { clusters, supercluster } = useClustering(locations, zoom, bounds, {
@@ -33,6 +35,11 @@ export function LayersMap() {
 
   return (
     <div className="absolute inset-0 h-screen w-screen">
+      {isLoading ? (
+        <div className="fixed inset-0 z-10 m-auto size-fit">
+          <Spinner className="size-6" />
+        </div>
+      ) : null}
       <GoogleMapReact
         bootstrapURLKeys={{ key: env.NEXT_PUBLIC_GOOGLE_MAPS_KEY }}
         defaultCenter={SKS_COORDINATES}
