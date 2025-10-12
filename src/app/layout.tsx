@@ -15,9 +15,23 @@ const space_grotesk = Space_Grotesk({
   subsets: ["latin"],
 });
 
+const PRODUCTION_URL = "https://pogotownik.pl";
+
 export const metadata: Metadata = {
   title: "Pogotownik",
   description: "Zawsze bądź gotowy!",
+  metadataBase: new URL(PRODUCTION_URL),
+  openGraph: {
+    url: PRODUCTION_URL,
+    images: {
+      url: "/hero.png",
+      width: 2880,
+      height: 1800,
+    },
+  },
+  twitter: {
+    images: ["/hero.png"],
+  },
 };
 
 export default function RootLayout({
