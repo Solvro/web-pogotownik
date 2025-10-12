@@ -39,6 +39,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { reportEventType } from "@/config/constants";
+import { useMap } from "@/hooks/use-map";
 import { addReport } from "@/lib/services/reports";
 import { reportSchema } from "@/schemas";
 import type { ReportFormValues } from "@/types/forms";
@@ -49,27 +50,31 @@ export function ReportDialog({ trigger }: { trigger: ReactNode }) {
   const [dialogOpen, setDialogOpen] = useState(false);
   const [mapPickerOpen, setMapPickerOpen] = useState(false);
 
+  const { refetch, center, zoom } = useMap();
+
   const form = useForm<z.infer<typeof reportSchema>>({
     resolver: zodResolver(reportSchema),
     defaultValues: {
       reportEventType: "drone",
       description: "",
-      lat: 0,
-      lng: 0,
+      lat: Number.NaN,
+      lng: Number.NaN,
     },
   });
 
+  async function handleSubmit(data: ReportFormValues) {
+    const result = await addReport(data);
+    await refetch();
+    return result;
+  }
+
   function onSubmit(data: ReportFormValues) {
-    try {
-      toast.promise(addReport(data), {
-        loading: "Zapisywanie zgłoszenia...",
-        success: "Zgłoszenie zapisane.",
-        error: "Błąd podczas zapisywania zgłoszenia.",
-      });
-      setDialogOpen(false);
-    } catch {
-      toast.error("Błąd podczas zapisywania zgłoszenia.");
-    }
+    toast.promise(handleSubmit(data), {
+      loading: "Zapisywanie zgłoszenia...",
+      success: "Zgłoszenie zapisane.",
+      error: "Błąd podczas zapisywania zgłoszenia.",
+    });
+    setDialogOpen(false);
   }
 
   function handleMapSelect(lat: number, lng: number) {
@@ -79,7 +84,11 @@ export function ReportDialog({ trigger }: { trigger: ReactNode }) {
 
   const lat = form.watch("lat");
   const lng = form.watch("lng");
-  const hasCoordinates = lat !== 0 || lng !== 0;
+  const awaitingInput = Number.isNaN(lat) || Number.isNaN(lng);
+
+  const { lat: initialLat, lng: initialLng } = awaitingInput
+    ? center
+    : { lat, lng };
 
   return (
     <>
@@ -180,9 +189,9 @@ export function ReportDialog({ trigger }: { trigger: ReactNode }) {
                   className="w-full justify-start"
                 >
                   <MapPin className="mr-2 h-4 w-4" />
-                  {hasCoordinates
-                    ? `${lat.toFixed(6)}, ${lng.toFixed(6)}`
-                    : "Wybierz na mapie"}
+                  {awaitingInput
+                    ? "Wybierz na mapie"
+                    : `${lat.toFixed(6)}, ${lng.toFixed(6)}`}
                 </Button>
               </Field>
             </FieldGroup>
@@ -212,8 +221,9 @@ export function ReportDialog({ trigger }: { trigger: ReactNode }) {
         open={mapPickerOpen}
         onOpenChange={setMapPickerOpen}
         onSelect={handleMapSelect}
-        initialLat={lat === 0 ? undefined : lat}
-        initialLng={lng === 0 ? undefined : lng}
+        initialLat={initialLat}
+        initialLng={initialLng}
+        initialZoom={zoom}
       />
     </>
   );

@@ -8,12 +8,8 @@ export const reportSchema = z.object({
   description: z
     .string()
     .max(500, "Opis powinien zawierać nie więcej niż 500 znaków"),
-  lat: z
-    .number()
-    .refine((value) => value !== 0, { message: "Wybierz lokalizację" }),
-  lng: z
-    .number()
-    .refine((value) => value !== 0, { message: "Wybierz lokalizację" }),
+  lat: z.number(),
+  lng: z.number(),
 });
 
 /** Zod schema for validating enabled layers from cookies */
