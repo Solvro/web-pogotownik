@@ -17,7 +17,8 @@ export default function SplashScreen() {
         className="relative mx-auto mt-44 max-w-7xl px-6 text-center md:px-8"
       >
         <h1 className="font-cal animate-fade-in -translate-y-4 bg-linear-to-br from-black from-30% to-black/40 bg-clip-text py-6 text-6xl leading-none font-medium tracking-normal text-balance text-transparent opacity-0 [--animation-delay:200ms] dark:from-white dark:to-white/40">
-          <span className="text-primary">Pogotownik</span> – twój przewodnik,
+          <span className="text-primary font-extrabold">Pogotownik</span> – twój
+          przewodnik,
           <br className="hidden md:block" /> zawsze w pogotowiu.
         </h1>
         <p className="animate-fade-in mb-12 -translate-y-4 text-lg tracking-tight text-balance text-gray-400 opacity-0 [--animation-delay:400ms] md:text-xl">
