@@ -1,4 +1,4 @@
-import * as z from "zod";
+import { z } from "zod";
 
 import { reportEventType } from "@/config/constants";
 import { Layer } from "@/lib/enums";
