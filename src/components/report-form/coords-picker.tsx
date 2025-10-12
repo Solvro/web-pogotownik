@@ -11,7 +11,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { SKS_COORDINATES } from "@/config/constants";
 import { env } from "@/env";
 
 export function CoordsPicker({
@@ -20,21 +19,19 @@ export function CoordsPicker({
   onSelect,
   initialLat,
   initialLng,
+  initialZoom,
 }: {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onSelect: (lat: number, lng: number) => void;
-  initialLat?: number;
-  initialLng?: number;
+  initialLat: number;
+  initialLng: number;
+  initialZoom: number;
 }) {
   const [selectedCoords, setSelectedCoords] = useState<{
     lat: number;
     lng: number;
-  } | null>(
-    initialLat != null && initialLng != null
-      ? { lat: initialLat, lng: initialLng }
-      : null,
-  );
+  } | null>({ lat: initialLat, lng: initialLng });
 
   function handleMapClick(event: GoogleMapReact.ClickEventValue) {
     setSelectedCoords({ lat: event.lat, lng: event.lng });
@@ -60,12 +57,8 @@ export function CoordsPicker({
         <div className="relative flex-1 overflow-hidden rounded-lg border">
           <GoogleMapReact
             bootstrapURLKeys={{ key: env.NEXT_PUBLIC_GOOGLE_MAPS_KEY }}
-            defaultCenter={
-              initialLat != null && initialLng != null
-                ? { lat: initialLat, lng: initialLng }
-                : SKS_COORDINATES
-            }
-            defaultZoom={14}
+            defaultCenter={{ lat: initialLat, lng: initialLng }}
+            defaultZoom={initialZoom}
             onClick={handleMapClick}
             options={{
               fullscreenControl: false,

@@ -18,6 +18,7 @@ export interface MapContextValue {
   setDistance: (distance: number) => void;
   locations: LabelledLayerLocation<Layer>[];
   isLoading: boolean;
+  refetch: () => Promise<unknown>;
 }
 
 export const MapContext = createContext<MapContextValue | undefined>(undefined);
