@@ -6,7 +6,7 @@ import { useState } from "react";
 import type { ReactNode } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
-import type * as z from "zod";
+import type { z } from "zod";
 
 import { reportEventType } from "@/config/constants";
 import { addReport } from "@/lib/services/reports";
