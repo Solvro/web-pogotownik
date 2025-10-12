@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-misused-spread */
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
