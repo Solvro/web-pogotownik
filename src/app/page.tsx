@@ -39,7 +39,6 @@ export default function SplashScreen() {
             <Image
               src={HeroImage}
               alt="Hero Image"
-              e
               className="relative h-full w-full rounded-[inherit] border object-contain"
             />
           </div>
