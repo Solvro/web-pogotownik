@@ -19,73 +19,103 @@ const LAYER_FORMATTERS: {
 } = {
   [Layer.Smog]: (Icon, meta) => ({
     marker: (
-      <div>
-        <Icon
-          className={cn(
-            // TODO: zmień kolory/rozmiary
-            meta.airQuality.overallValue < 1
-              ? "text-green-500"
-              : meta.airQuality.overallValue < 2
-                ? "text-yellow-500"
-                : meta.airQuality.overallValue < 3
-                  ? "text-orange-500"
-                  : meta.airQuality.overallValue < 4
-                    ? "text-red-500"
-                    : "text-neutral-500",
-          )}
-        />
-      </div>
+      // <div>
+      //   <Icon
+      //     className={cn(
+      //       // TODO: zmień kolory/rozmiary
+      //       meta.airQuality.overallValue < 1
+      //         ? "text-green-500"
+      //         : meta.airQuality.overallValue < 2
+      //           ? "text-yellow-500"
+      //           : meta.airQuality.overallValue < 3
+      //             ? "text-orange-500"
+      //             : meta.airQuality.overallValue < 4
+      //               ? "text-red-500"
+      //               : "text-neutral-500",
+      //     )}
+      //   />
+      // </div>
+      <button
+        className={cn(
+          "flex size-6 items-center justify-center rounded-full border backdrop-blur-md",
+          meta.airQuality.overallValue < 1 &&
+            "border-green-400 bg-green-100/50 text-green-500",
+          meta.airQuality.overallValue >= 1 &&
+            meta.airQuality.overallValue < 2 &&
+            "border-yellow-600 bg-yellow-100/50 text-yellow-500",
+          meta.airQuality.overallValue >= 2 &&
+            meta.airQuality.overallValue < 3 &&
+            "border-orange-700 bg-orange-100/50 text-orange-500",
+          meta.airQuality.overallValue >= 3 &&
+            meta.airQuality.overallValue < 4 &&
+            "border-red-700 bg-red-100/50 text-red-500",
+          meta.airQuality.overallValue >= 4 &&
+            "border-purple-700 bg-purple-100/50 text-purple-500",
+        )}
+      >
+        <Icon className={"size-4"} />
+      </button>
     ),
     tooltip: <div>Jakość powietrza: {meta.airQuality.overallCategoryName}</div>,
   }),
   [Layer.Fires]: (Icon, meta) => ({
     marker: (
-      <div>
-        <Icon
-          className={cn(
-            meta.intensity === 1 && "text-yellow-500",
-            meta.intensity === 2 && "text-orange-500",
-            meta.intensity >= 3 && "text-red-500",
-          )}
-        />
-      </div>
+      <button
+        className={cn(
+          "flex size-6 items-center justify-center rounded-full border backdrop-blur-md",
+          meta.intensity === 1 &&
+            "border-yellow-400 bg-yellow-100/50 text-yellow-500",
+          meta.intensity === 2 &&
+            "border-orange-600 bg-orange-100/50 text-orange-500",
+          meta.intensity >= 3 && "border-red-700 bg-red-100/50 text-red-500",
+        )}
+      >
+        <Icon className={"size-4"} />
+      </button>
     ),
     tooltip: <div>Wielkość pożaru: {meta.intensity}</div>,
   }),
   [Layer.Floods]: (Icon, meta) => ({
     marker: (
-      <div>
-        <Icon
-          className={cn(
-            meta.warningLevel === 1 && "text-blue-400",
-            meta.warningLevel === 2 && "text-blue-600",
-            meta.warningLevel >= 3 && "text-blue-700",
-          )}
-        />
-      </div>
+      <button
+        className={cn(
+          "flex size-6 items-center justify-center rounded-full border backdrop-blur-md",
+          meta.warningLevel === 1 &&
+            "border-blue-400 bg-blue-100/50 text-blue-400",
+          meta.warningLevel === 2 &&
+            "border-blue-600 bg-blue-100/50 text-blue-600",
+          meta.warningLevel >= 3 &&
+            "border-blue-700 bg-blue-100/50 text-blue-700",
+        )}
+      >
+        <Icon className={"size-4"} />
+      </button>
     ),
     tooltip: <div>Stopień zagrożenia: {meta.warningLevel}</div>,
   }),
   [Layer.Shelters]: (Icon, meta) => ({
     marker: (
-      <div>
-        <Icon
-          className={cn(
-            "size-3",
-            meta.buildingType.includes("[3]") && "text-green-500",
-            meta.buildingType.includes("[2]") && "text-blue-500",
-            meta.buildingType.includes("[1]") && "text-red-500",
-          )}
-        />
-      </div>
+      <button
+        className={cn(
+          "flex size-6 items-center justify-center rounded-full border backdrop-blur-md",
+          meta.buildingType.includes("[3]") &&
+            "border-green-600 bg-green-100/50 text-green-500",
+          meta.buildingType.includes("[2]") &&
+            "border-blue-600 bg-blue-100/50 text-blue-500",
+          meta.buildingType.includes("[1]") &&
+            "border-red-600 bg-red-100/50 text-red-500",
+        )}
+      >
+        <Icon className={"size-4"} />
+      </button>
     ),
     tooltip: null,
   }),
   [Layer.AEDs]: (Icon) => ({
     marker: (
-      <div>
-        <Icon /> Defibrylator
-      </div>
+      <button className="flex size-6 items-center justify-center rounded-full border border-rose-600 bg-rose-100/50 backdrop-blur-md">
+        <Icon className={cn("size-4 text-rose-500")} />
+      </button>
     ),
     tooltip: null,
   }),

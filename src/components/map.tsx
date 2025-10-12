@@ -37,7 +37,9 @@ export function LayersMap() {
     <div className="absolute inset-0 h-screen w-screen">
       {isLoading ? (
         <div className="fixed inset-0 z-10 m-auto size-fit">
-          <Spinner className="size-6" />
+          <div className="flex size-10 items-center justify-center rounded-full bg-white/20 backdrop-blur-md">
+            <Spinner className="size-6 stroke-3 text-blue-800" />
+          </div>
         </div>
       ) : null}
       <GoogleMapReact
