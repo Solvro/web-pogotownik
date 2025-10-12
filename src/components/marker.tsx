@@ -1,4 +1,4 @@
-import { LAYER_ICONS } from "@/config/icons";
+import { LAYER_ICONS, USER_REPORT_ICONS } from "@/config/icons";
 import { Layer } from "@/lib/enums";
 import { cn } from "@/lib/utils";
 import type {
@@ -89,6 +89,18 @@ const LAYER_FORMATTERS: {
     ),
     tooltip: null,
   }),
+  [Layer.Reports]: (DefaultIcon, meta) => {
+    const Icon = USER_REPORT_ICONS[meta.reportEventType] ?? DefaultIcon;
+    return {
+      marker: (
+        <div>
+          <Icon className="text-purple-500" /> Zgłoszenie:{" "}
+          {meta.reportEventType}
+        </div>
+      ),
+      tooltip: <div>Opis zgłoszenia: {meta.description}</div>,
+    };
+  },
 };
 
 export function Marker<T extends Layer>({
@@ -97,11 +109,11 @@ export function Marker<T extends Layer>({
 }: { layer: T } & LayerLocation<T>) {
   const formatter = LAYER_FORMATTERS[layer];
   const { marker } = formatter(LAYER_ICONS[layer], meta);
-  // (
-  //   <Tooltip>
-  //     <TooltipTrigger>{marker}</TooltipTrigger>
-  //     <TooltipContent>{tooltip}</TooltipContent>
-  //   </Tooltip>
-  // )
-  return marker;
+  return (
+    // <Tooltip>
+    //   <TooltipTrigger>{marker}</TooltipTrigger>
+    //   <TooltipContent>{tooltip}</TooltipContent>
+    // </Tooltip>
+    marker
+  );
 }

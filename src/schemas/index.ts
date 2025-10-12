@@ -16,11 +16,12 @@ export const reportSchema = z.object({
     .refine((value) => value !== 0, { message: "Wybierz lokalizację" }),
 });
 
-// Zod schema for validating enabled layers from cookies
+/** Zod schema for validating enabled layers from cookies */
 export const EnabledLayersSchema = z.object({
   [Layer.Smog]: z.boolean(),
   [Layer.Fires]: z.boolean(),
   [Layer.Floods]: z.boolean(),
   [Layer.Shelters]: z.boolean(),
   [Layer.AEDs]: z.boolean(),
+  [Layer.Reports]: z.boolean(),
 });

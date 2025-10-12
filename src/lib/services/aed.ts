@@ -1,19 +1,12 @@
 "use server";
 
-import type { InferSelectModel } from "drizzle-orm";
 import { sql } from "drizzle-orm";
 
 import db from "@/db";
+import type { DefibrillatorWithCoords } from "@/types/aeds";
 import type { LayerFetchFunction } from "@/types/app";
 
-import type { defibrillatorsTable } from "../../../drizzle/schema";
 import type { Layer } from "../enums";
-
-type Defibrillator = InferSelectModel<typeof defibrillatorsTable>;
-type DefibrillatorWithCoords = Defibrillator & {
-  Longitude: number;
-  Latitude: number;
-};
 
 export const getAedsInDistance: LayerFetchFunction<Layer.AEDs> = async (
   center,

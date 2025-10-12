@@ -10,6 +10,7 @@ import type { AEDsData } from "./aeds";
 import type { FiresData } from "./fires";
 import type { FloodsData } from "./floods";
 import type { Promisish } from "./helpers";
+import type { UserReportMetadata } from "./reports";
 import type { SheltersData } from "./shelters";
 import type { AirQualityData } from "./smog";
 
@@ -24,6 +25,7 @@ export interface LayerMetadata {
   [Layer.Floods]: FloodsData;
   [Layer.Shelters]: SheltersData;
   [Layer.AEDs]: AEDsData;
+  [Layer.Reports]: UserReportMetadata;
 }
 
 export interface LayerOptions {
@@ -32,6 +34,7 @@ export interface LayerOptions {
   [Layer.Floods]: { distance?: number };
   [Layer.Shelters]: { distance: number };
   [Layer.AEDs]: { distance: number };
+  [Layer.Reports]: { distance?: number };
 }
 
 export interface LayerLocation<L extends Layer> extends Coordinates {

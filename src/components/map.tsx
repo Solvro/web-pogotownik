@@ -121,8 +121,7 @@ export function LayersMap() {
 
           const { layerLocation } = cluster.properties;
           const uniqueId =
-            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-            layerLocation.meta != null && "id" in layerLocation.meta
+            "id" in layerLocation.meta
               ? layerLocation.meta.id
               : `${String(lat)}-${String(lng)}`;
 
