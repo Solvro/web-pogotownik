@@ -13,6 +13,7 @@ import { useMap } from "@/hooks/use-map";
 import { calculateDistance } from "@/lib/helpers/geography";
 
 import { ClusterMarker } from "./cluster-marker";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./ui/dialog";
 import { Spinner } from "./ui/spinner";
 
 export function LayersMap() {
@@ -24,6 +25,9 @@ export function LayersMap() {
     bounds,
     setBounds,
     setDistance,
+    openDialog,
+    setOpenDialog,
+    metadata,
     locations,
     isLoading,
   } = useMap();
@@ -142,6 +146,17 @@ export function LayersMap() {
           );
         })}
       </GoogleMapReact>
+
+      <Dialog open={openDialog} onOpenChange={setOpenDialog}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>Dialog</DialogTitle>
+          </DialogHeader>
+          <div>
+            <pre>{JSON.parse(JSON.stringify(metadata, null, 2))}</pre>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

@@ -38,9 +38,11 @@ export function MapContextProvider({ children }: { children: ReactNode }) {
   } | null>(null);
   const [distance, setDistance] = useState(100);
   const [zoom, setZoom] = useState(DEFAULT_MAP_ZOOM);
+  const [metadata, setMetadata] = useState<string | null>(null);
   const [enabledLayers, setEnabledLayers] = useState(() =>
     getEnabledLayersFromCookie(),
   );
+  const [openDialog, setOpenDialog] = useState(false);
 
   async function fetchLocations() {
     const layersToFetch = typedEntries(enabledLayers).filter(
@@ -102,6 +104,10 @@ export function MapContextProvider({ children }: { children: ReactNode }) {
         setBounds,
         distance,
         setDistance,
+        openDialog,
+        setOpenDialog,
+        metadata,
+        setMetadata,
         locations: query.data ?? [],
         isLoading: query.isLoading,
         refetch: query.refetch,

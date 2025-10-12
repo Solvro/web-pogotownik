@@ -1,4 +1,5 @@
 import { LAYER_ICONS, USER_REPORT_ICONS } from "@/config/icons";
+import { useMap } from "@/hooks/use-map";
 import { Layer } from "@/lib/enums";
 import { cn } from "@/lib/utils";
 import type {
@@ -19,7 +20,7 @@ const LAYER_FORMATTERS: {
 } = {
   [Layer.Smog]: (Icon, meta) => ({
     marker: (
-      <button
+      <div
         className={cn(
           "flex size-6 items-center justify-center rounded-full border backdrop-blur-md",
           meta.airQuality.overallValue < 1 &&
@@ -38,13 +39,13 @@ const LAYER_FORMATTERS: {
         )}
       >
         <Icon className={"size-4"} />
-      </button>
+      </div>
     ),
     tooltip: <div>Jakość powietrza: {meta.airQuality.overallCategoryName}</div>,
   }),
   [Layer.Fires]: (Icon, meta) => ({
     marker: (
-      <button
+      <div
         className={cn(
           "flex size-6 items-center justify-center rounded-full border backdrop-blur-md",
           meta.intensity === 1 &&
@@ -55,13 +56,13 @@ const LAYER_FORMATTERS: {
         )}
       >
         <Icon className={"size-4"} />
-      </button>
+      </div>
     ),
     tooltip: <div>Wielkość pożaru: {meta.intensity}</div>,
   }),
   [Layer.Floods]: (Icon, meta) => ({
     marker: (
-      <button
+      <div
         className={cn(
           "flex size-6 items-center justify-center rounded-full border backdrop-blur-md",
           meta.warningLevel === 1 &&
@@ -73,13 +74,13 @@ const LAYER_FORMATTERS: {
         )}
       >
         <Icon className={"size-4"} />
-      </button>
+      </div>
     ),
     tooltip: <div>Stopień zagrożenia: {meta.warningLevel}</div>,
   }),
   [Layer.Shelters]: (Icon, meta) => ({
     marker: (
-      <button
+      <div
         className={cn(
           "flex size-6 items-center justify-center rounded-full border backdrop-blur-md",
           meta.buildingType.includes("[3]") &&
@@ -91,15 +92,15 @@ const LAYER_FORMATTERS: {
         )}
       >
         <Icon className={"size-4"} />
-      </button>
+      </div>
     ),
     tooltip: null,
   }),
   [Layer.AEDs]: (Icon) => ({
     marker: (
-      <button className="flex size-6 items-center justify-center rounded-full border border-rose-600 bg-rose-100/50 backdrop-blur-md">
+      <div className="flex size-6 items-center justify-center rounded-full border border-rose-600 bg-rose-100/50 backdrop-blur-md">
         <Icon className={cn("size-4 text-rose-500")} />
-      </button>
+      </div>
     ),
     tooltip: null,
   }),
@@ -107,9 +108,9 @@ const LAYER_FORMATTERS: {
     const Icon = USER_REPORT_ICONS[meta.reportEventType] ?? DefaultIcon;
     return {
       marker: (
-        <button className="flex size-6 items-center justify-center rounded-full border border-purple-600 bg-purple-100/50 backdrop-blur-md">
+        <div className="flex size-6 items-center justify-center rounded-full border border-purple-600 bg-purple-100/50 backdrop-blur-md">
           <Icon className={cn("size-4 text-purple-500")} />
-        </button>
+        </div>
       ),
       tooltip: <div>Opis zgłoszenia: {meta.description}</div>,
     };
@@ -120,6 +121,8 @@ export function Marker<T extends Layer>({
   layer,
   meta,
 }: { layer: T } & LayerLocation<T>) {
+  const { setOpenDialog, setMetadata } = useMap();
+
   const formatter = LAYER_FORMATTERS[layer];
   const { icon } = LAYER_ICONS[layer];
   const { marker } = formatter(icon, meta);
@@ -128,6 +131,13 @@ export function Marker<T extends Layer>({
     //   <TooltipTrigger>{marker}</TooltipTrigger>
     //   <TooltipContent>{tooltip}</TooltipContent>
     // </Tooltip>
-    marker
+    <button
+      onClick={() => {
+        setOpenDialog(true);
+        setMetadata(JSON.stringify(meta, null, 2));
+      }}
+    >
+      {marker}
+    </button>
   );
 }
