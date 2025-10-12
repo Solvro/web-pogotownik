@@ -19,22 +19,6 @@ const LAYER_FORMATTERS: {
 } = {
   [Layer.Smog]: (Icon, meta) => ({
     marker: (
-      // <div>
-      //   <Icon
-      //     className={cn(
-      //       // TODO: zmień kolory/rozmiary
-      //       meta.airQuality.overallValue < 1
-      //         ? "text-green-500"
-      //         : meta.airQuality.overallValue < 2
-      //           ? "text-yellow-500"
-      //           : meta.airQuality.overallValue < 3
-      //             ? "text-orange-500"
-      //             : meta.airQuality.overallValue < 4
-      //               ? "text-red-500"
-      //               : "text-neutral-500",
-      //     )}
-      //   />
-      // </div>
       <button
         className={cn(
           "flex size-6 items-center justify-center rounded-full border backdrop-blur-md",
@@ -123,10 +107,9 @@ const LAYER_FORMATTERS: {
     const Icon = USER_REPORT_ICONS[meta.reportEventType] ?? DefaultIcon;
     return {
       marker: (
-        <div>
-          <Icon className="text-purple-500" /> Zgłoszenie:{" "}
-          {meta.reportEventType}
-        </div>
+        <button className="flex size-6 items-center justify-center rounded-full border border-purple-600 bg-purple-100/50 backdrop-blur-md">
+          <Icon className={cn("size-4 text-purple-500")} />
+        </button>
       ),
       tooltip: <div>Opis zgłoszenia: {meta.description}</div>,
     };
