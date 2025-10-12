@@ -3,7 +3,11 @@
 import { createContext, useContext } from "react";
 
 import type { Layer } from "@/lib/enums";
-import type { Coordinates, LabelledLayerLocation } from "@/types/app";
+import type {
+  Coordinates,
+  LabelledLayerLocation,
+  LabelledMetadata,
+} from "@/types/app";
 
 export interface MapContextValue {
   enabledLayers: Record<Layer, boolean>;
@@ -18,8 +22,8 @@ export interface MapContextValue {
   setDistance: (distance: number) => void;
   openDialog: boolean;
   setOpenDialog: (open: boolean) => void;
-  metadata: string | null;
-  setMetadata: (metadata: string | null) => void;
+  dialogData: LabelledMetadata<Layer> | null;
+  setDialogData: ({ layer, metadata }: LabelledMetadata<Layer>) => void;
   locations: LabelledLayerLocation<Layer>[];
   isLoading: boolean;
   refetch: () => Promise<unknown>;

@@ -6,7 +6,7 @@ import type { ReactNode } from "react";
 
 import { DEFAULT_MAP_ZOOM, SKS_COORDINATES } from "@/config/constants";
 import { MapContext } from "@/hooks/use-map";
-import type { LayerFetchFunction } from "@/types/app";
+import type { LabelledMetadata, LayerFetchFunction } from "@/types/app";
 
 import { Layer } from "./enums";
 import {
@@ -38,7 +38,9 @@ export function MapContextProvider({ children }: { children: ReactNode }) {
   } | null>(null);
   const [distance, setDistance] = useState(100);
   const [zoom, setZoom] = useState(DEFAULT_MAP_ZOOM);
-  const [metadata, setMetadata] = useState<string | null>(null);
+  const [dialogData, setDialogData] = useState<LabelledMetadata<Layer> | null>(
+    null,
+  );
   const [enabledLayers, setEnabledLayers] = useState(() =>
     getEnabledLayersFromCookie(),
   );
@@ -106,8 +108,8 @@ export function MapContextProvider({ children }: { children: ReactNode }) {
         setDistance,
         openDialog,
         setOpenDialog,
-        metadata,
-        setMetadata,
+        dialogData,
+        setDialogData,
         locations: query.data ?? [],
         isLoading: query.isLoading,
         refetch: query.refetch,

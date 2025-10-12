@@ -61,3 +61,8 @@ export type LayerBoundsFetchFunction<L extends Layer> = (bounds: {
 }) => Promisish<LayerLocation<L>[]>;
 
 export type EnabledLayers = z.infer<typeof EnabledLayersSchema>;
+
+export interface LabelledMetadata<T extends Layer> {
+  layer: T;
+  metadata: LayerMetadata[T];
+}
