@@ -88,7 +88,7 @@ export default function BackpackPage() {
       )}
 
       {donePacking ? (
-        <Confetti className="!z-10" width={width} height={height} />
+        <Confetti className="z-10!" width={width} height={height} />
       ) : null}
 
       <div className="grid flex-1 grid-cols-3">
