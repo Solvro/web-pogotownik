@@ -1,5 +1,6 @@
 import type { LucideProps } from "lucide-react";
 import type { ElementType, RefAttributes } from "react";
+// eslint-disable-next-line import/no-named-as-default
 import type z from "zod";
 
 import type { Layer } from "@/lib/enums";
