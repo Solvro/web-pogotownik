@@ -14,6 +14,7 @@ import {
   saveEnabledLayersToCookie,
 } from "./helpers/cookies";
 import { typedEntries } from "./helpers/typescript";
+import { getAedsInDistance } from "./services/aed";
 import { getFireReports } from "./services/fires";
 import { getFloodWarnings } from "./services/floods";
 import { getShelters } from "./services/shelters";
@@ -24,7 +25,7 @@ export const LAYER_FETCH_FUNCTIONS: { [L in Layer]: LayerFetchFunction<L> } = {
   [Layer.Fires]: getFireReports,
   [Layer.Floods]: getFloodWarnings,
   [Layer.Shelters]: getShelters,
-  [Layer.AEDs]: () => [],
+  [Layer.AEDs]: getAedsInDistance,
 };
 
 export function MapContextProvider({ children }: { children: ReactNode }) {
