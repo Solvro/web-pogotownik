@@ -108,7 +108,8 @@ export function Marker<T extends Layer>({
   meta,
 }: { layer: T } & LayerLocation<T>) {
   const formatter = LAYER_FORMATTERS[layer];
-  const { marker } = formatter(LAYER_ICONS[layer], meta);
+  const { icon } = LAYER_ICONS[layer];
+  const { marker } = formatter(icon, meta);
   return (
     // <Tooltip>
     //   <TooltipTrigger>{marker}</TooltipTrigger>

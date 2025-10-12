@@ -8,12 +8,7 @@ import { Controller, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import type { z } from "zod";
 
-import { reportEventType } from "@/config/constants";
-import { addReport } from "@/lib/services/reports";
-import { reportSchema } from "@/schemas";
-import type { ReportFormValues } from "@/types/forms";
-
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -22,27 +17,32 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "../ui/dialog";
+} from "@/components/ui/dialog";
 import {
   Field,
   FieldContent,
   FieldError,
   FieldGroup,
   FieldLabel,
-} from "../ui/field";
+} from "@/components/ui/field";
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupText,
   InputGroupTextarea,
-} from "../ui/input-group";
+} from "@/components/ui/input-group";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../ui/select";
+} from "@/components/ui/select";
+import { reportEventType } from "@/config/constants";
+import { addReport } from "@/lib/services/reports";
+import { reportSchema } from "@/schemas";
+import type { ReportFormValues } from "@/types/forms";
+
 import { CoordsPicker } from "./coords-picker";
 
 export function ReportDialog({ trigger }: { trigger: ReactNode }) {

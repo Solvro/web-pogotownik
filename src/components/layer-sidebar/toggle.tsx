@@ -1,49 +1,54 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { cloneElement, isValidElement } from "react";
 
+import { Checkbox } from "@/components/ui/checkbox";
+import { Label } from "@/components/ui/label";
 import { useMap } from "@/hooks/use-map";
 import type { Layer } from "@/lib/enums";
-
-import { Checkbox } from "../ui/checkbox";
-import { Label } from "../ui/label";
+import { cn } from "@/lib/utils";
+import type { SynchronousReactNode } from "@/types/helpers";
 
 export function LayerToggle({
   layer,
   icon,
+  description,
 }: {
   layer: Layer;
   icon: ReactNode;
+  description: SynchronousReactNode;
 }) {
   const { enabledLayers, toggleLayer } = useMap();
   const id = `toggle-${layer.replaceAll(/\s+/g, "-").toLowerCase()}`;
+  const checked = enabledLayers[layer];
   return (
     <Label
       htmlFor={id}
-      className="hover:bg-accent/50 flex items-start gap-3 rounded-lg border bg-white p-3 has-[[aria-checked=true]]:border-blue-600 has-[[aria-checked=true]]:bg-blue-50 dark:has-[[aria-checked=true]]:border-blue-900 dark:has-[[aria-checked=true]]:bg-blue-950"
+      className={cn(
+        "hover:bg-accent/50 flex items-start gap-3 rounded-lg border bg-white p-3",
+        {
+          "border-blue-600 bg-blue-50 dark:border-blue-900 dark:bg-blue-950":
+            checked,
+        },
+      )}
     >
       <Checkbox
         id={id}
-        checked={enabledLayers[layer]}
+        checked={checked}
         onCheckedChange={() => {
           toggleLayer(layer);
         }}
-        className="data-[state=checked]:border-blue-600 data-[state=checked]:bg-blue-600 data-[state=checked]:text-white dark:data-[state=checked]:border-blue-700 dark:data-[state=checked]:bg-blue-700"
+        className={cn({
+          "dark:border-blue-700d border-blue-600 bg-blue-600 text-white dark:bg-blue-700":
+            checked,
+        })}
       />
       <div className="grid gap-1.5 font-normal">
         <div className="flex items-center justify-between">
           <p className="text-sm leading-none font-medium">{layer}</p>
-          {isValidElement(icon)
-            ? cloneElement(icon as React.ReactElement<{ className?: string }>, {
-                className:
-                  `w-4 h-4 ${(icon as React.ReactElement<{ className?: string }>).props.className ?? ""}`.trim(),
-              })
-            : icon}
+          {icon}
         </div>
-        <p className="text-muted-foreground text-sm">
-          You can enable or disable notifications at any time.
-        </p>
+        <p className="text-muted-foreground text-sm">{description}</p>
       </div>
     </Label>
   );
