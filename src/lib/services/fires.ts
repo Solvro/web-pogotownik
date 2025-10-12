@@ -19,8 +19,9 @@ export async function fetchFireData() {
     east: "24.5",
     north: "55.9",
   };
-  const rangeDays = 1;
-  const currentDate = new Date().toISOString().split("T")[0];
+  const rangeDays = 10;
+  const currentDate = "2025-10-9";
+  // const currentDate = new Date().toISOString().split("T")[0];
 
   const url = [
     SERVICE_API_URLS[Layer.Fires].satelliteData,
@@ -35,7 +36,6 @@ export async function fetchFireData() {
     String(rangeDays),
     currentDate,
   ].join("/");
-
   const data = await fetchQuery<string>(
     url,
     {
