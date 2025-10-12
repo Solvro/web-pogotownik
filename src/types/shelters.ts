@@ -43,7 +43,7 @@ export interface ShelterAttributes {
 
 export interface SheltersData {
   id: number;
-  address: string;
+  address: string | null;
   capacity: number;
   area: number;
   type: string;

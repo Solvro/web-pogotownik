@@ -7,14 +7,33 @@ import {
   MAX_MAP_ZOOM,
   SKS_COORDINATES,
 } from "@/config/constants";
+import { LAYER_ICONS } from "@/config/icons";
 import { env } from "@/env";
 import { useClustering } from "@/hooks/use-clustering";
 import { useMap } from "@/hooks/use-map";
+import type { Layer } from "@/lib/enums";
 import { calculateDistance } from "@/lib/helpers/geography";
+import { LAYER_FORMATTERS } from "@/lib/layer-formatters";
+import type { LabelledMetadata } from "@/types/app";
 
 import { ClusterMarker } from "./cluster-marker";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "./ui/dialog";
+import { Button } from "./ui/button";
+import { Dialog, DialogClose, DialogContent, DialogFooter } from "./ui/dialog";
 import { Spinner } from "./ui/spinner";
+
+function LayerDialog<T extends Layer>({
+  dialogData,
+}: {
+  dialogData: LabelledMetadata<T> | null;
+}) {
+  if (dialogData == null) {
+    return null;
+  }
+  const { icon } = LAYER_ICONS[dialogData.layer];
+  const formatter = LAYER_FORMATTERS[dialogData.layer];
+  const { dialog } = formatter(icon, dialogData.metadata);
+  return dialog;
+}
 
 export function LayersMap() {
   const {
@@ -27,7 +46,7 @@ export function LayersMap() {
     setDistance,
     openDialog,
     setOpenDialog,
-    metadata,
+    dialogData,
     locations,
     isLoading,
   } = useMap();
@@ -146,15 +165,14 @@ export function LayersMap() {
           );
         })}
       </GoogleMapReact>
-
       <Dialog open={openDialog} onOpenChange={setOpenDialog}>
         <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Dialog</DialogTitle>
-          </DialogHeader>
-          <div>
-            <pre>{JSON.parse(JSON.stringify(metadata, null, 2))}</pre>
-          </div>
+          <LayerDialog dialogData={dialogData} />
+          <DialogFooter>
+            <DialogClose asChild>
+              <Button>Ok</Button>
+            </DialogClose>
+          </DialogFooter>
         </DialogContent>
       </Dialog>
     </div>
