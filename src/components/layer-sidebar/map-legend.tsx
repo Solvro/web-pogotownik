@@ -32,7 +32,7 @@ export function MapLegend() {
     <div
       className={cn(
         "fixed bottom-6 left-6 z-20 flex w-xs max-w-xs min-w-xs flex-col rounded-lg bg-white/30 p-4 pt-2 shadow-lg backdrop-blur-md transition-[bottom]",
-        !open && "-bottom-[27rem]",
+        !open && "-bottom-108",
       )}
     >
       <div className="mx-1 flex items-center justify-between">
