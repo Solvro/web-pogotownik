@@ -5,9 +5,18 @@ import type { ReactNode } from "react";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { useMap } from "@/hooks/use-map";
-import type { Layer } from "@/lib/enums";
+import { Layer } from "@/lib/enums";
 import { cn } from "@/lib/utils";
 import type { SynchronousReactNode } from "@/types/helpers";
+
+const ICON_COLORS = {
+  [Layer.Smog]: "text-green-500",
+  [Layer.AEDs]: "text-red-500",
+  [Layer.Fires]: "text-orange-500",
+  [Layer.Floods]: "text-blue-500",
+  [Layer.Reports]: "text-purple-500",
+  [Layer.Shelters]: "text-yellow-500",
+};
 
 export function LayerToggle({
   layer,
@@ -39,16 +48,18 @@ export function LayerToggle({
           toggleLayer(layer);
         }}
         className={cn({
-          "dark:border-blue-700d border-blue-600 bg-blue-600 text-white dark:bg-blue-700":
+          "border-blue-600 bg-blue-600 text-white dark:border-blue-700 dark:bg-blue-700":
             checked,
         })}
       />
-      <div className="grid gap-1.5 font-normal">
-        <div className="flex items-center justify-between">
-          <p className="text-sm leading-none font-medium">{layer}</p>
-          {icon}
+      <div className="grid w-full gap-1.5 font-normal">
+        <div className="flex w-full items-center justify-between">
+          <h1 className="text-sm leading-none font-medium">{layer}</h1>
+          <div className={cn(ICON_COLORS[layer])}>{icon}</div>
         </div>
-        <p className="text-muted-foreground text-sm">{description}</p>
+        <p className="text-muted-foreground text-xs text-balance">
+          {description}
+        </p>
       </div>
     </Label>
   );

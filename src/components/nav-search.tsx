@@ -3,6 +3,7 @@
 import { Search } from "lucide-react";
 import React, { useState } from "react";
 import { geocodeByAddress, getLatLng } from "react-google-places-autocomplete";
+import { toast } from "sonner";
 
 import { useMap } from "@/hooks/use-map";
 
@@ -15,8 +16,8 @@ const getCoordsFromAddress = async (address: string) => {
     const results = await geocodeByAddress(address);
     const { lat, lng } = await getLatLng(results[0]);
     return { lat, lng };
-  } catch (error) {
-    console.error("Error getting coordinates:", error);
+  } catch {
+    toast.error("Nie znaleziono lokalizacji");
     return null;
   }
 };

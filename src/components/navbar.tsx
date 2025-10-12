@@ -2,6 +2,7 @@
 
 import { Backpack, Megaphone } from "lucide-react";
 import Link from "next/link";
+import { useSelectedLayoutSegment } from "next/navigation";
 
 import { SidebarTrigger } from "@/components/ui/sidebar";
 
@@ -12,9 +13,11 @@ import { Button } from "./ui/button";
 import { ButtonGroup, ButtonGroupSeparator } from "./ui/button-group";
 
 export function Navbar() {
+  const segment = useSelectedLayoutSegment();
+
   return (
     <div className="fixed inset-x-0 top-4 z-10 flex items-center justify-center">
-      <div className="relative container mx-auto flex items-center gap-4 rounded-lg bg-white/40 p-4 backdrop-blur-lg">
+      <div className="relative container mx-auto flex items-center gap-4 rounded-lg bg-white/40 p-4 shadow-lg backdrop-blur-lg">
         {/* <ShineBorder
           shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]}
           borderWidth={2}
@@ -34,6 +37,14 @@ export function Navbar() {
 
           <div className="flex justify-end">
             <ButtonGroup>
+              {segment === "(map)" ? (
+                <>
+                  <Button size="icon" asChild variant="white">
+                    <SidebarTrigger />
+                  </Button>
+                  <ButtonGroupSeparator />
+                </>
+              ) : null}
               <ReportDialog
                 trigger={
                   <Button variant="white">
@@ -41,14 +52,11 @@ export function Navbar() {
                   </Button>
                 }
               />
+              <ButtonGroupSeparator />
               <Button variant="white" asChild>
                 <Link href="/plecak">
                   <Backpack /> Plecak
                 </Link>
-              </Button>
-              <ButtonGroupSeparator />
-              <Button size="icon" asChild variant="white">
-                <SidebarTrigger />
               </Button>
             </ButtonGroup>
           </div>
