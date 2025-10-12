@@ -2,10 +2,7 @@ import GoogleMapReact from "google-map-react";
 import { MapPin } from "lucide-react";
 import { useState } from "react";
 
-import { SKS_COORDINATES } from "@/config/constants";
-import { env } from "@/env";
-
-import { Button } from "../ui/button";
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -13,7 +10,9 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "../ui/dialog";
+} from "@/components/ui/dialog";
+import { SKS_COORDINATES } from "@/config/constants";
+import { env } from "@/env";
 
 export function CoordsPicker({
   open,

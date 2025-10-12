@@ -29,13 +29,19 @@ export function LayersSidebar() {
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu className="gap-2">
-              {typedEntries(LAYER_ICONS).map(([layer, Icon]) => (
-                <SidebarMenuItem key={layer}>
-                  <SidebarMenuButton asChild>
-                    <LayerToggle layer={layer} icon={<Icon />} />
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
+              {typedEntries(LAYER_ICONS).map(
+                ([layer, { icon: Icon, description }]) => (
+                  <SidebarMenuItem key={layer}>
+                    <SidebarMenuButton asChild>
+                      <LayerToggle
+                        layer={layer}
+                        icon={<Icon className="size-4" />}
+                        description={description}
+                      />
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ),
+              )}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
