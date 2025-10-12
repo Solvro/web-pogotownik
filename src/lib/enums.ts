@@ -4,4 +4,5 @@ export enum Layer {
   Fires = "Pożary",
   Floods = "Powodzie",
   AEDs = "AED",
+  Reports = "Zgłoszenia użytkowników",
 }

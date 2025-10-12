@@ -32,6 +32,7 @@ export const DEFAULT_ENABLED_LAYERS: EnabledLayers = {
   [Layer.Floods]: false,
   [Layer.Shelters]: false,
   [Layer.AEDs]: false,
+  [Layer.Reports]: false,
 };
 
 export const reportEventType = [

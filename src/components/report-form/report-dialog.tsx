@@ -11,7 +11,7 @@ import type { z } from "zod";
 import { reportEventType } from "@/config/constants";
 import { addReport } from "@/lib/services/reports";
 import { reportSchema } from "@/schemas";
-import type { reportFormValues } from "@/types/forms";
+import type { ReportFormValues } from "@/types/forms";
 
 import { Button } from "../ui/button";
 import {
@@ -59,7 +59,7 @@ export function ReportDialog({ trigger }: { trigger: ReactNode }) {
     },
   });
 
-  function onSubmit(data: reportFormValues) {
+  function onSubmit(data: ReportFormValues) {
     try {
       toast.promise(addReport(data), {
         loading: "Zapisywanie zgłoszenia...",

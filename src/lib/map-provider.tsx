@@ -17,6 +17,7 @@ import { typedEntries } from "./helpers/typescript";
 import { getAedsInDistance } from "./services/aed";
 import { getFireReports } from "./services/fires";
 import { getFloodWarnings } from "./services/floods";
+import { getAllReports } from "./services/reports";
 import { getShelters } from "./services/shelters";
 import { getAirQuality } from "./services/smog";
 
@@ -26,6 +27,7 @@ export const LAYER_FETCH_FUNCTIONS: { [L in Layer]: LayerFetchFunction<L> } = {
   [Layer.Floods]: getFloodWarnings,
   [Layer.Shelters]: getShelters,
   [Layer.AEDs]: getAedsInDistance,
+  [Layer.Reports]: getAllReports,
 };
 
 export function MapContextProvider({ children }: { children: ReactNode }) {
@@ -36,8 +38,8 @@ export function MapContextProvider({ children }: { children: ReactNode }) {
   } | null>(null);
   const [distance, setDistance] = useState(100);
   const [zoom, setZoom] = useState(DEFAULT_MAP_ZOOM);
-  const [enabledLayers, setEnabledLayers] = useState<Record<Layer, boolean>>(
-    () => getEnabledLayersFromCookie(),
+  const [enabledLayers, setEnabledLayers] = useState(() =>
+    getEnabledLayersFromCookie(),
   );
 
   async function fetchLocations() {
