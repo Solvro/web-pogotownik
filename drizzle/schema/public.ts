@@ -1,6 +1,8 @@
 import {
   customType,
+  doublePrecision,
   integer,
+  pgEnum,
   pgTable,
   text,
   timestamp,
@@ -52,4 +54,19 @@ export const defibrillatorsTable = pgTable("defibrillators", {
   // Timestamps
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
+export const ReportEventTypeEnum = pgEnum("report_event_type", [
+  "drone",
+  "protest",
+  "no_energy",
+  "other",
+]);
+
+export const reportsTable = pgTable("reports", {
+  id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  reportEventType: ReportEventTypeEnum().notNull(),
+  description: text().notNull(),
+  lat: doublePrecision().notNull(),
+  lng: doublePrecision().notNull(),
 });

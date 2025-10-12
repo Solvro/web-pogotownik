@@ -1,0 +1,275 @@
+{
+  "id": "e6a8ed7b-da81-4887-892b-816af3235a28",
+  "prevId": "4db72fd2-7c6b-4f00-b186-edd71839edee",
+  "version": "7",
+  "dialect": "postgresql",
+  "tables": {
+    "public.defibrillators": {
+      "name": "defibrillators",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "identity": {
+            "type": "always",
+            "name": "defibrillators_id_seq",
+            "schema": "public",
+            "increment": "1",
+            "startWith": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
+        },
+        "osm_id": {
+          "name": "osm_id",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "osm_type": {
+          "name": "osm_type",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "osm_version": {
+          "name": "osm_version",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "location": {
+          "name": "location",
+          "type": "geography(Point, 4326)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "access": {
+          "name": "access",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "indoor": {
+          "name": "indoor",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "emergency": {
+          "name": "emergency",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "'defibrillator'"
+        },
+        "phone": {
+          "name": "phone",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "opening_hours": {
+          "name": "opening_hours",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "emergency_phone": {
+          "name": "emergency_phone",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "defibrillator_location": {
+          "name": "defibrillator_location",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "defibrillator_location_pl": {
+          "name": "defibrillator_location_pl",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "defibrillator_location_en": {
+          "name": "defibrillator_location_en",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "level": {
+          "name": "level",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "check_date": {
+          "name": "check_date",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "defibrillators_osm_id_unique": {
+          "name": "defibrillators_osm_id_unique",
+          "nullsNotDistinct": false,
+          "columns": ["osm_id"]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.reports": {
+      "name": "reports",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "identity": {
+            "type": "always",
+            "name": "reports_id_seq",
+            "schema": "public",
+            "increment": "1",
+            "startWith": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
+        },
+        "reportEventType": {
+          "name": "reportEventType",
+          "type": "report_event_type",
+          "typeSchema": "public",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "description": {
+          "name": "description",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "lat": {
+          "name": "lat",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "lng": {
+          "name": "lng",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {},
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    },
+    "public.users": {
+      "name": "users",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "integer",
+          "primaryKey": true,
+          "notNull": true,
+          "identity": {
+            "type": "always",
+            "name": "users_id_seq",
+            "schema": "public",
+            "increment": "1",
+            "startWith": "1",
+            "minValue": "1",
+            "maxValue": "2147483647",
+            "cache": "1",
+            "cycle": false
+          }
+        },
+        "name": {
+          "name": "name",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "age": {
+          "name": "age",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "email": {
+          "name": "email",
+          "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {
+        "users_email_unique": {
+          "name": "users_email_unique",
+          "nullsNotDistinct": false,
+          "columns": ["email"]
+        }
+      },
+      "policies": {},
+      "checkConstraints": {},
+      "isRLSEnabled": false
+    }
+  },
+  "enums": {
+    "public.report_event_type": {
+      "name": "report_event_type",
+      "schema": "public",
+      "values": ["drone", "protest", "no_energy", "other"]
+    }
+  },
+  "schemas": {},
+  "sequences": {},
+  "roles": {},
+  "policies": {},
+  "views": {},
+  "_meta": {
+    "columns": {},
+    "schemas": {},
+    "tables": {}
+  }
+}

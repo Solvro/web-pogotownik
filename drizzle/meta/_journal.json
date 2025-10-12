@@ -15,6 +15,20 @@
       "when": 1760217297988,
       "tag": "0001_lethal_slapstick",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1760224503206,
+      "tag": "0002_lowly_thunderbolt_ross",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1760225780987,
+      "tag": "0003_silent_wrecking_crew",
+      "breakpoints": true
     }
   ]
 }
