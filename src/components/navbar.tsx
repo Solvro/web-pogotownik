@@ -6,6 +6,7 @@ import Link from "next/link";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 
 import { NavSearch } from "./nav-search";
+import { ReportDialog } from "./report-form/report-dialog";
 import { AuroraText } from "./ui/aurora-text";
 import { Button } from "./ui/button";
 import { ButtonGroup, ButtonGroupSeparator } from "./ui/button-group";
@@ -33,9 +34,13 @@ export function Navbar() {
 
           <div className="flex justify-end">
             <ButtonGroup>
-              <Button variant="white">
-                <Megaphone /> Report
-              </Button>
+              <ReportDialog
+                trigger={
+                  <Button variant="white">
+                    <Megaphone /> Report
+                  </Button>
+                }
+              />
               <Button variant="white" asChild>
                 <Link href="/plecak">
                   <Backpack /> Plecak

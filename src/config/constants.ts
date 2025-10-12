@@ -33,3 +33,10 @@ export const DEFAULT_ENABLED_LAYERS: EnabledLayers = {
   [Layer.Shelters]: false,
   [Layer.AEDs]: false,
 };
+
+export const reportEventType = [
+  { label: "Dron", value: "drone" },
+  { label: "Protest", value: "protest" },
+  { label: "Brak prądu", value: "no_energy" },
+  { label: "Inne", value: "other" },
+] as const;
