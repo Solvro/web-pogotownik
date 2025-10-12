@@ -23,7 +23,7 @@ export function postGISToCoordinates(point: string): [number, number] {
   const match = regex.exec(point);
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   if (match?.[1] === undefined || match[2] === undefined) {
-    throw new Error(`Invalid PostGIS point format: ${point}`);
+    return [0, 0];
   }
   return [Number.parseFloat(match[1]), Number.parseFloat(match[2])];
 }

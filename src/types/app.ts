@@ -5,6 +5,7 @@ import type z from "zod";
 import type { Layer } from "@/lib/enums";
 import type { EnabledLayersSchema } from "@/schemas";
 
+import type { AEDsData } from "./aeds";
 import type { FiresData } from "./fires";
 import type { FloodsData } from "./floods";
 import type { Promisish } from "./helpers";
@@ -21,7 +22,7 @@ export interface LayerMetadata {
   [Layer.Fires]: FiresData;
   [Layer.Floods]: FloodsData;
   [Layer.Shelters]: SheltersData;
-  [Layer.AEDs]: null;
+  [Layer.AEDs]: AEDsData;
 }
 
 export interface LayerOptions {
@@ -29,7 +30,7 @@ export interface LayerOptions {
   [Layer.Fires]: { distance?: number };
   [Layer.Floods]: { distance?: number };
   [Layer.Shelters]: { distance: number };
-  [Layer.AEDs]: { distance?: number };
+  [Layer.AEDs]: { distance: number };
 }
 
 export interface LayerLocation<L extends Layer> extends Coordinates {
