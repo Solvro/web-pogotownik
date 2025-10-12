@@ -24,7 +24,7 @@ export function Navbar() {
         /> */}
         <div className="grid w-full grid-cols-3 items-center gap-3">
           <h1 className="text-2xl font-bold tracking-tighter">
-            <Link href="/">
+            <Link href="/map">
               <AuroraText colors={["#3b82f6", "#e11d48"]}>
                 Pogotownik
               </AuroraText>
@@ -37,7 +37,7 @@ export function Navbar() {
 
           <div className="flex justify-end">
             <ButtonGroup>
-              {segment === "(map)" ? (
+              {segment === "map" ? (
                 <>
                   <Button size="icon" asChild variant="white">
                     <SidebarTrigger />
