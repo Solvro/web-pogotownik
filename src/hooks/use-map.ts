@@ -16,6 +16,10 @@ export interface MapContextValue {
   setBounds: (bounds: { nw: Coordinates; se: Coordinates } | null) => void;
   distance: number;
   setDistance: (distance: number) => void;
+  openDialog: boolean;
+  setOpenDialog: (open: boolean) => void;
+  metadata: string | null;
+  setMetadata: (metadata: string | null) => void;
   locations: LabelledLayerLocation<Layer>[];
   isLoading: boolean;
   refetch: () => Promise<unknown>;
