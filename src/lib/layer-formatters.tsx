@@ -237,9 +237,11 @@ export const LAYER_FORMATTERS: {
             Dostęp: {meta.access === "private" ? "prywatny" : "publiczny"}
           </div>
           <div>
-            Lokalizacja: {meta.defibrillatorLocation},{" "}
-            {meta.level == null ? "parter" : `poziom ${meta.level}`},{" "}
-            {meta.indoor === "yes" ? "w srodku" : "na zewnątrz"}
+            Lokalizacja:{" "}
+            {meta.level == null || meta.level === "0"
+              ? "Parter"
+              : `Poziom ${meta.level}`}
+            , {meta.indoor === "yes" ? "w środku" : "na zewnątrz"}
           </div>
           {meta.openingHours == null ? null : (
             <div>Godziny otwarcia: {meta.openingHours}</div>
