@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
 import type { ReactNode } from "react";
 
-import { LayersSidebar } from "@/components/layer-sidebar";
 import { Navbar } from "@/components/navbar";
 import { Toaster } from "@/components/ui/sonner";
 import { Providers } from "@/lib/providers";
@@ -30,9 +29,9 @@ export default function RootLayout({
       <body className={cn(space_grotesk.variable, "font-sans antialiased")}>
         <Providers>
           <Navbar />
-          <Toaster />
-          <LayersSidebar />
-          <main>{children}</main>
+          <Toaster richColors />
+
+          {children}
         </Providers>
       </body>
     </html>

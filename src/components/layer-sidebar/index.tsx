@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import { Layers } from "lucide-react";
 
 import {
@@ -20,9 +21,9 @@ export function LayersSidebar() {
     <Sidebar
       variant="floating"
       side="right"
-      className="top-24 right-10 h-[calc(100vh-15rem)]"
+      className="top-24 right-6 h-fit w-xs"
     >
-      <SidebarContent className="bg-transparent">
+      <SidebarContent className="bg-transparent shadow-lg">
         <SidebarGroup className="bg-transparent">
           <SidebarGroupLabel className="flex gap-2 text-black">
             Warstwy <Layers size={8} />
@@ -44,6 +45,19 @@ export function LayersSidebar() {
               )}
             </SidebarMenu>
           </SidebarGroupContent>
+          <div className="text-muted-foreground flex justify-center text-xs">
+            <p className="mt-2 text-center text-balance">
+              Nasza{" "}
+              <a href="#" className="font-medium text-blue-600">
+                Polityka prywatności
+              </a>{" "}
+              oraz{" "}
+              <a href="#" className="font-medium text-blue-600">
+                Warunki korzystania z usługi
+              </a>
+              .
+            </p>
+          </div>
         </SidebarGroup>
       </SidebarContent>
     </Sidebar>
