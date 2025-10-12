@@ -157,5 +157,7 @@ export const getAirQuality: LayerFetchFunction<Layer.Smog> = async (
       },
     })),
   );
-  return quality;
+  return quality.filter(
+    (entry) => !Number.isNaN(entry.meta.airQuality.overallValue),
+  );
 };

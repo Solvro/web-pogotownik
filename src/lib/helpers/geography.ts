@@ -25,7 +25,7 @@ function haversineDistance(a: Coordinates, b: Coordinates): number {
 export function getClosestPoints<T extends Coordinates>(
   target: Coordinates,
   points: T[],
-  count = 10,
+  count = 20,
 ): (T & { distance: number })[] {
   return points
     .map((point) => ({

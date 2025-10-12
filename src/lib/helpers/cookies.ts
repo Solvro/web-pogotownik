@@ -23,8 +23,8 @@ export function getEnabledLayersFromCookie(): EnabledLayers {
     const parsed: unknown = JSON.parse(cookieValue);
     const validated = EnabledLayersSchema.parse(parsed);
     return validated;
-  } catch (error) {
-    console.error("Failed to parse enabled layers from cookie:", error);
+  } catch {
+    // console.error("Failed to parse enabled layers from cookie:", error);
     return DEFAULT_ENABLED_LAYERS;
   }
 }
