@@ -1,12 +1,12 @@
 "use client";
 
-import { Compass, Search } from "lucide-react";
+import { Search } from "lucide-react";
 import React, { useState } from "react";
 import { geocodeByAddress, getLatLng } from "react-google-places-autocomplete";
 
 import { useMap } from "@/hooks/use-map";
 
-import { Button } from "./ui/button";
+import { NavCenterLocation } from "./nav-center-location";
 import { ButtonGroup } from "./ui/button-group";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "./ui/input-group";
 
@@ -59,9 +59,7 @@ export function NavSearch() {
         </InputGroup>
       </ButtonGroup>
       <ButtonGroup>
-        <Button variant="outline" size="icon">
-          <Compass />
-        </Button>
+        <NavCenterLocation />
       </ButtonGroup>
     </ButtonGroup>
   );
