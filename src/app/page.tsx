@@ -21,9 +21,9 @@ export default function SplashScreen() {
           <br className="hidden md:block" /> zawsze w pogotowiu.
         </h1>
         <p className="animate-fade-in mb-12 -translate-y-4 text-lg tracking-tight text-balance text-gray-400 opacity-0 [--animation-delay:400ms] md:text-xl">
-          Automatycznie wyszukuj nalepsze oferty.
+          Wszystko dotyczące bezpieczeństwa
           <br className="hidden md:block" />
-          Jako pracownik i jako pracodawca.
+          masz w zasięgu ręki
         </p>
         <div className="flex items-center justify-center gap-3">
           <Button size={"lg"} asChild>
@@ -39,6 +39,7 @@ export default function SplashScreen() {
             <Image
               src={HeroImage}
               alt="Hero Image"
+              e
               className="relative h-full w-full rounded-[inherit] border object-contain"
             />
           </div>
