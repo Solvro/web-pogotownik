@@ -5,30 +5,25 @@ import { toast } from "sonner";
 
 import { DEFAULT_MAP_ZOOM } from "@/config/constants";
 import { useMap } from "@/hooks/use-map";
-import type { Coordinates } from "@/types/app";
+import { getCurrentLocation } from "@/lib/helpers/geolocation";
 
 import { Button } from "./ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 
 export function NavCenterLocation() {
-  const { setCenter, setZoom } = useMap();
+  const { setCenter, setZoom, setIsLoading } = useMap();
 
-  function handleCenterLocation() {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const coordinates: Coordinates = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-        };
-        setCenter(coordinates);
-        setZoom(DEFAULT_MAP_ZOOM);
-      },
-      (error) => {
-        toast.error("Nie udało się pobrać lokalizacji");
-        console.error("Error getting location:", error);
-      },
-      { enableHighAccuracy: true, timeout: 5000, maximumAge: 0 },
-    );
+  async function handleCenterLocation() {
+    try {
+      const location = await getCurrentLocation();
+      setCenter(location);
+      setZoom(DEFAULT_MAP_ZOOM);
+    } catch (error) {
+      toast.error("Nie udało się pobrać lokalizacji");
+      console.error("Error getting location:", error);
+    } finally {
+      setIsLoading(false);
+    }
   }
 
   return (

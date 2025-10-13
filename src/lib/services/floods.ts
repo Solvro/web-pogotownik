@@ -1,6 +1,6 @@
 "use server";
 
-import { SERVICE_API_URLS } from "@/config/constants";
+import { SERVICE_CONFIG } from "@/config/constants";
 import type { Coordinates, LayerLocation } from "@/types/app";
 import type { StationData } from "@/types/floods";
 
@@ -10,7 +10,7 @@ import { getClosestPoints } from "../helpers/geography";
 
 export async function fetchStationsWithWarnings() {
   const data = await fetchQuery<StationData[]>(
-    SERVICE_API_URLS[Layer.Floods].stations,
+    SERVICE_CONFIG[Layer.Floods].stationsUrl,
     {
       next: {
         revalidate: 7 * 24 * 60 * 60, // 1 week

@@ -32,6 +32,7 @@ export const LAYER_FETCH_FUNCTIONS: { [L in Layer]: LayerFetchFunction<L> } = {
 
 export function MapContextProvider({ children }: { children: ReactNode }) {
   const [center, setCenter] = useState(SKS_COORDINATES);
+  const [isForceLoading, setIsForceLoading] = useState(false);
   const [bounds, setBounds] = useState<{
     nw: { lat: number; lng: number };
     se: { lat: number; lng: number };
@@ -110,8 +111,9 @@ export function MapContextProvider({ children }: { children: ReactNode }) {
         setOpenDialog,
         dialogData,
         setDialogData,
+        isLoading: query.isLoading || isForceLoading,
+        setIsLoading: setIsForceLoading,
         locations: query.data ?? [],
-        isLoading: query.isLoading,
         refetch: query.refetch,
       }}
     >

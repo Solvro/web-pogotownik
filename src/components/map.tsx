@@ -1,6 +1,7 @@
 "use client";
 
 import GoogleMapReact from "google-map-react";
+import { useEffect } from "react";
 
 import {
   DEFAULT_MAP_ZOOM,
@@ -13,6 +14,7 @@ import { useClustering } from "@/hooks/use-clustering";
 import { useMap } from "@/hooks/use-map";
 import type { Layer } from "@/lib/enums";
 import { calculateDistance } from "@/lib/helpers/geography";
+import { getCurrentLocation } from "@/lib/helpers/geolocation";
 import { LAYER_FORMATTERS } from "@/lib/layer-formatters";
 import type { LabelledMetadata } from "@/types/app";
 
@@ -47,14 +49,30 @@ export function LayersMap() {
     openDialog,
     setOpenDialog,
     dialogData,
-    locations,
     isLoading,
+    setIsLoading,
+    locations,
   } = useMap();
 
   const { clusters, supercluster } = useClustering(locations, zoom, bounds, {
     radius: zoom < 12 ? 50 : 30,
     maxZoom: 16,
   });
+
+  useEffect(() => {
+    async function centerMap() {
+      setIsLoading(true);
+      try {
+        const location = await getCurrentLocation();
+        setCenter(location);
+      } catch (error) {
+        console.error("Error getting current location:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+    void centerMap();
+  }, [setCenter, setIsLoading]);
 
   return (
     <div className="absolute inset-0 h-screen w-screen">
