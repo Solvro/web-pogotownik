@@ -1,6 +1,6 @@
 "use server";
 
-import { SERVICE_API_URLS } from "@/config/constants";
+import { SERVICE_CONFIG } from "@/config/constants";
 import type { LayerFetchFunction } from "@/types/app";
 import type {
   AirQualityIndexResponse,
@@ -32,7 +32,7 @@ async function fetchAllSmogStations(): Promise<
   SanitizedAirQualityMeasuringStation[]
 > {
   const data = await fetchQuery<AirQualityMeasuringStationFindAllResponse>(
-    SERVICE_API_URLS[Layer.Smog].stations,
+    SERVICE_CONFIG[Layer.Smog].stationsUrl,
     {
       next: {
         revalidate: 7 * 24 * 60 * 60, // 1 week
@@ -83,7 +83,7 @@ async function getAllSmogStations(): Promise<
 async function getAirQualityAtStation(
   stationId: number,
 ): Promise<SanitizedAirQualityIndex> {
-  const url = `${SERVICE_API_URLS[Layer.Smog].airQuality}/${String(stationId)}`;
+  const url = `${SERVICE_CONFIG[Layer.Smog].airQualityUrl}/${String(stationId)}`;
   const data = await fetchQuery<AirQualityIndexResponse>(url, {
     next: {
       revalidate: 60, // 1 minute

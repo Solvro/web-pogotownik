@@ -1,17 +1,18 @@
 "use server";
 
+import { SERVICE_CONFIG } from "@/config/constants";
 import type { LayerFetchFunction } from "@/types/app";
 import type { SheltersResponse } from "@/types/shelters";
 
 import { fetchQuery } from "../api";
-import type { Layer } from "../enums";
+import { Layer } from "../enums";
 
 export const getShelters: LayerFetchFunction<Layer.Shelters> = async (
   { lat, lng },
   options,
 ) => {
   const data = await fetchQuery<SheltersResponse>(
-    `https://services-eu1.arcgis.com/HE4WRthd9CIPj0R8/arcgis/rest/services/schrony_csv/FeatureServer/0/query?where=1%3D1&geometryType=esriGeometryPoint&geometry=${lng.toString()},${lat.toString()}&inSR=4326&distance=${options?.distance.toString() ?? "500"}&limit=5000&units=esriSRUnit_Meter&outFields=*&f=json`,
+    `${SERVICE_CONFIG[Layer.Shelters].url}&geometry=${lng.toString()},${lat.toString()}&distance=${options?.distance.toString() ?? "500"}`,
     {
       next: {
         revalidate: 7 * 24 * 60 * 60, // 1 week

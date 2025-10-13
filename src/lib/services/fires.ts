@@ -1,6 +1,6 @@
 "use server";
 
-import { SERVICE_API_URLS } from "@/config/constants";
+import { SERVICE_CONFIG } from "@/config/constants";
 import type { Coordinates, LayerLocation } from "@/types/app";
 
 import { fetchQuery } from "../api";
@@ -19,19 +19,22 @@ export async function fetchFireData() {
     east: "24.5",
     north: "55.9",
   };
+  const queryArea = SERVICE_CONFIG[Layer.Fires].restrictQueryAreaToPoland
+    ? [
+        areaBorders.west,
+        areaBorders.south,
+        areaBorders.east,
+        areaBorders.north,
+      ].join(",")
+    : "world";
   const rangeDays = 10;
   const currentDate = new Date().toISOString().split("T")[0];
 
   const url = [
-    SERVICE_API_URLS[Layer.Fires].satelliteData,
+    SERVICE_CONFIG[Layer.Fires].satelliteDataUrl,
     key,
     dataSource,
-    [
-      areaBorders.west,
-      areaBorders.south,
-      areaBorders.east,
-      areaBorders.north,
-    ].join(","),
+    queryArea,
     String(rangeDays),
     currentDate,
   ].join("/");

@@ -6,17 +6,21 @@ export const SKS_COORDINATES: Coordinates = {
   lng: 17.056_914_550_627_265,
 };
 
-export const SERVICE_API_URLS = {
+export const SERVICE_CONFIG = {
   [Layer.Smog]: {
-    stations:
+    stationsUrl:
       "https://api.gios.gov.pl/pjp-api/v1/rest/station/findAll?size=1000",
-    airQuality: "https://api.gios.gov.pl/pjp-api/v1/rest/aqindex/getIndex",
+    airQualityUrl: "https://api.gios.gov.pl/pjp-api/v1/rest/aqindex/getIndex",
   },
   [Layer.Fires]: {
-    satelliteData: "https://firms.modaps.eosdis.nasa.gov/api/area/csv",
+    satelliteDataUrl: "https://firms.modaps.eosdis.nasa.gov/api/area/csv",
+    restrictQueryAreaToPoland: true,
   },
   [Layer.Floods]: {
-    stations: "https://danepubliczne.imgw.pl/api/data/hydro/",
+    stationsUrl: "https://danepubliczne.imgw.pl/api/data/hydro/",
+  },
+  [Layer.Shelters]: {
+    url: "https://services-eu1.arcgis.com/HE4WRthd9CIPj0R8/arcgis/rest/services/schrony_csv/FeatureServer/0/query?where=1%3D1&geometryType=esriGeometryPoint&limit=5000&units=esriSRUnit_Meter&outFields=*&f=json&inSR=4326",
   },
 };
 

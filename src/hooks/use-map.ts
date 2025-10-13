@@ -26,6 +26,7 @@ export interface MapContextValue {
   setDialogData: ({ layer, metadata }: LabelledMetadata<Layer>) => void;
   locations: LabelledLayerLocation<Layer>[];
   isLoading: boolean;
+  setIsLoading: (loading: boolean) => void;
   refetch: () => Promise<unknown>;
 }
 
