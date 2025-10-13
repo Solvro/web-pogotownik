@@ -1,7 +1,8 @@
 "use client";
 
 import { Search } from "lucide-react";
-import React, { useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
 import { geocodeByAddress, getLatLng } from "react-google-places-autocomplete";
 import { toast } from "sonner";
 
@@ -11,36 +12,67 @@ import { NavCenterLocation } from "./nav-center-location";
 import { ButtonGroup } from "./ui/button-group";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "./ui/input-group";
 
-const getCoordsFromAddress = async (address: string) => {
-  try {
-    const results = await geocodeByAddress(address);
-    const { lat, lng } = await getLatLng(results[0]);
-    return { lat, lng };
-  } catch {
-    toast.error("Nie znaleziono lokalizacji");
-    return null;
+const MAX_SEARCH_ATTEMPTS = 3;
+const SEARCH_ATTEMPT_DELAY_MS = 100;
+
+async function getCoordsFromAddress(address: string) {
+  // If the user just navigated to the map, the might not be mounted yet
+  // Try up to three times to wait for it to be ready
+  for (let attempt = 0; attempt < MAX_SEARCH_ATTEMPTS; attempt++) {
+    try {
+      const results = await geocodeByAddress(address);
+      const { lat, lng } = await getLatLng(results[0]);
+      return { lat, lng };
+    } catch {
+      await new Promise((resolve) =>
+        setTimeout(resolve, SEARCH_ATTEMPT_DELAY_MS),
+      );
+    }
   }
-};
+  toast.error("Nie znaleziono lokalizacji");
+  return null;
+}
 
 export function NavSearch() {
   const [inputValue, setInputValue] = useState("");
   const { setCenter, setZoom } = useMap();
+  const [pendingSearch, setPendingSearch] = useState<string | null>(null);
+  const pathname = usePathname();
+  const segments = pathname.split("/");
+  const firstSegment = segments[1];
+  const router = useRouter();
 
-  const handleSearch = async () => {
-    if (inputValue.trim()) {
-      const coords = await getCoordsFromAddress(inputValue);
+  useEffect(() => {
+    if (firstSegment !== "map" || pendingSearch == null) {
+      return;
+    }
+
+    async function performSearch(search: string) {
+      const coords = await getCoordsFromAddress(search);
       if (coords !== null) {
         setCenter({ lat: coords.lat, lng: coords.lng });
         setZoom(14);
       }
     }
-  };
 
-  const handleKeyDown = (event: React.KeyboardEvent) => {
-    if (event.key === "Enter") {
-      void handleSearch();
+    void performSearch(pendingSearch);
+    setPendingSearch(null);
+  }, [firstSegment, pendingSearch, setCenter, setZoom]);
+
+  function handleSearch() {
+    if (firstSegment !== "map") {
+      router.push("/map");
     }
-  };
+    if (inputValue.trim()) {
+      setPendingSearch(inputValue);
+    }
+  }
+
+  function handleKeyDown(event: React.KeyboardEvent) {
+    if (event.key === "Enter") {
+      handleSearch();
+    }
+  }
 
   return (
     <ButtonGroup className="w-full [--radius:9999rem]">

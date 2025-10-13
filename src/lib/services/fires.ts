@@ -20,8 +20,7 @@ export async function fetchFireData() {
     north: "55.9",
   };
   const rangeDays = 10;
-  const currentDate = "2025-10-9";
-  // const currentDate = new Date().toISOString().split("T")[0];
+  const currentDate = new Date().toISOString().split("T")[0];
 
   const url = [
     SERVICE_API_URLS[Layer.Fires].satelliteData,

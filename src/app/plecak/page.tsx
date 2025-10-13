@@ -46,27 +46,26 @@ export default function BackpackPage() {
   const donePacking = packedItems === totalItems;
 
   return (
-    <div className="container mx-auto flex h-screen flex-col pt-28">
-      <div className="flex items-center gap-10">
-        <h1 className="min-w-max -translate-y-1 text-3xl font-bold">
+    <div className="container mx-auto mb-6! flex h-screen flex-col px-4 pt-28">
+      <div className="mb-20 flex flex-wrap items-center justify-between gap-x-10 gap-y-4 md:flex-nowrap md:justify-start">
+        <h1 className="order-1 min-w-max -translate-y-1 text-lg font-bold sm:text-2xl lg:text-3xl">
           Plecak bezpieczeństwa
         </h1>
-        <div className="flex w-full items-center gap-3">
-          <Progress
-            value={(packedItems / totalItems) * 100}
-            indicatorClassName={cn(donePacking && "bg-emerald-500")}
-          />
-          <span
-            className={cn(
-              "min-w-max rounded-full bg-blue-500 px-2 py-1.5 text-xs font-bold text-white",
-              {
-                "bg-emerald-500": donePacking,
-              },
-            )}
-          >
-            {packedItems} / {totalItems} spakowane
-          </span>
-        </div>
+        <Progress
+          value={(packedItems / totalItems) * 100}
+          indicatorClassName={cn(donePacking && "bg-emerald-500")}
+          className="order-3 w-full md:order-2"
+        />
+        <span
+          className={cn(
+            "order-2 min-w-max rounded-full bg-blue-500 px-2 py-1.5 text-xs font-bold text-white md:order-3",
+            {
+              "bg-emerald-500": donePacking,
+            },
+          )}
+        >
+          {packedItems} / {totalItems} spakowane
+        </span>
       </div>
       {donePacking ? null : (
         <Alert
@@ -74,7 +73,7 @@ export default function BackpackPage() {
           className="mt-6 max-w-3xl border-blue-600 bg-blue-50"
         >
           <InfoIcon />
-          <AlertTitle className="text-lg font-semibold text-blue-600">
+          <AlertTitle className="line-clamp-2 text-lg font-semibold text-blue-600">
             Dlaczego warto mieć przygotowany plecak?
           </AlertTitle>
           <AlertDescription>
@@ -103,7 +102,7 @@ export default function BackpackPage() {
             </div>
           </div>
         ) : (
-          <ul className="col-span-2 my-8 grid grid-cols-2 gap-2">
+          <ul className="col-span-2 my-8 grid gap-2 sm:grid-cols-2">
             {BACKPACK_ITEMS.map((item) => (
               <li key={item}>
                 <Label>

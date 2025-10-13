@@ -20,10 +20,9 @@ export default function SplashScreen() {
           przewodnik,
           <br className="hidden md:block" /> zawsze w pogotowiu.
         </h1>
-        <p className="animate-fade-in mb-12 -translate-y-4 text-lg tracking-tight text-balance text-gray-400 opacity-0 [--animation-delay:400ms] md:text-xl">
-          Wszystko dotyczące bezpieczeństwa
-          <br className="hidden md:block" />
-          masz w zasięgu ręki
+        <p className="animate-fade-in mb-12 flex -translate-y-4 flex-col text-lg tracking-tight text-balance text-gray-400 opacity-0 [--animation-delay:400ms] md:text-xl">
+          <span>Wszystko dotyczące bezpieczeństwa</span>{" "}
+          <span>masz w zasięgu ręki</span>
         </p>
         <div className="flex items-center justify-center gap-3">
           <Button size={"lg"} asChild>
