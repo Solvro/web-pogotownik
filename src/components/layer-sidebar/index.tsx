@@ -1,5 +1,5 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { Layers } from "lucide-react";
+import Link from "next/link";
 
 import {
   Sidebar,
@@ -48,13 +48,19 @@ export function LayersSidebar() {
           <div className="text-muted-foreground flex justify-center text-xs">
             <p className="mt-2 text-center text-balance">
               Nasza{" "}
-              <a href="#" className="font-medium text-blue-600">
+              <Link
+                href="/privacy-policy"
+                className="font-medium text-blue-600"
+              >
                 Polityka prywatności
-              </a>{" "}
+              </Link>{" "}
               oraz{" "}
-              <a href="#" className="font-medium text-blue-600">
+              <Link
+                href="/terms-of-service"
+                className="font-medium text-blue-600"
+              >
                 Warunki korzystania z usługi
-              </a>
+              </Link>
               .
             </p>
           </div>

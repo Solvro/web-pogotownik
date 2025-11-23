@@ -46,7 +46,7 @@ export default function BackpackPage() {
   const donePacking = packedItems === totalItems;
 
   return (
-    <div className="container mx-auto mb-6! flex h-screen flex-col px-4 pt-28">
+    <>
       <div className="mb-20 flex flex-wrap items-center justify-between gap-x-10 gap-y-4 md:flex-nowrap md:justify-start">
         <h1 className="order-1 min-w-max -translate-y-1 text-lg font-bold sm:text-2xl lg:text-3xl">
           Plecak bezpieczeństwa
@@ -135,6 +135,6 @@ export default function BackpackPage() {
           ) : null}
         </div>
       </div>
-    </div>
+    </>
   );
 }

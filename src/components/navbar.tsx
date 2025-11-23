@@ -55,7 +55,7 @@ export function Navbar() {
               <ReportDialog
                 trigger={
                   <Button variant="white">
-                    <Megaphone /> Report
+                    <Megaphone /> Zgłoś
                   </Button>
                 }
               />
