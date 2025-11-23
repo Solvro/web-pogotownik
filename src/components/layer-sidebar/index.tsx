@@ -1,5 +1,5 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { Layers } from "lucide-react";
+import Link from "next/link";
 
 import {
   Sidebar,
@@ -18,11 +18,7 @@ import { LayerToggle } from "./toggle";
 
 export function LayersSidebar() {
   return (
-    <Sidebar
-      variant="floating"
-      side="right"
-      className="top-24 right-6 h-fit w-xs"
-    >
+    <Sidebar variant="floating" side="right" className="top-24 right-4 h-fit">
       <SidebarContent className="bg-transparent shadow-lg">
         <SidebarGroup className="bg-transparent">
           <SidebarGroupLabel className="flex gap-2 text-black">
@@ -48,13 +44,19 @@ export function LayersSidebar() {
           <div className="text-muted-foreground flex justify-center text-xs">
             <p className="mt-2 text-center text-balance">
               Nasza{" "}
-              <a href="#" className="font-medium text-blue-600">
+              <Link
+                href="/privacy-policy"
+                className="font-medium text-blue-600"
+              >
                 Polityka prywatności
-              </a>{" "}
+              </Link>{" "}
               oraz{" "}
-              <a href="#" className="font-medium text-blue-600">
+              <Link
+                href="/terms-of-service"
+                className="font-medium text-blue-600"
+              >
                 Warunki korzystania z usługi
-              </a>
+              </Link>
               .
             </p>
           </div>

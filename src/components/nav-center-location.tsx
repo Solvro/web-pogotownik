@@ -8,7 +8,6 @@ import { useMap } from "@/hooks/use-map";
 import { getCurrentLocation } from "@/lib/helpers/geolocation";
 
 import { Button } from "./ui/button";
-import { Tooltip, TooltipContent, TooltipTrigger } from "./ui/tooltip";
 
 export function NavCenterLocation() {
   const { setCenter, setZoom, setIsLoading } = useMap();
@@ -27,13 +26,13 @@ export function NavCenterLocation() {
   }
 
   return (
-    <Tooltip>
-      <TooltipTrigger asChild>
-        <Button variant="outline" size="icon" onClick={handleCenterLocation}>
-          <Compass />
-        </Button>
-      </TooltipTrigger>
-      <TooltipContent>Wycentruj mapę</TooltipContent>
-    </Tooltip>
+    <Button
+      variant="outline"
+      size="icon"
+      onClick={handleCenterLocation}
+      tooltip="Wycentruj mapę"
+    >
+      <Compass />
+    </Button>
   );
 }
