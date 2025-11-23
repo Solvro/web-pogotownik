@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useSelectedLayoutSegment } from "next/navigation";
 import { useWindowScroll } from "react-use";
 
-import { SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarTrigger, useSidebar } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utils";
 
 import { NavSearch } from "./nav-search";
@@ -18,6 +18,7 @@ export function Navbar() {
   const segment = useSelectedLayoutSegment();
   const isMapPage = segment === "map";
   const scroll = useWindowScroll();
+  const sidebar = useSidebar();
 
   return (
     <div className="fixed inset-x-0 top-4 z-10 flex items-center justify-center px-2 sm:px-4">
@@ -46,8 +47,13 @@ export function Navbar() {
             <ButtonGroup>
               {isMapPage ? (
                 <>
-                  <Button size="icon" asChild variant="white">
-                    <SidebarTrigger />
+                  <Button
+                    size="icon"
+                    asChild
+                    variant="white"
+                    tooltip={`${sidebar.open ? "Ukryj" : "Pokaż"} warstwy`}
+                  >
+                    <SidebarTrigger side="right" />
                   </Button>
                   <ButtonGroupSeparator />
                 </>

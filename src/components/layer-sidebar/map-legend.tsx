@@ -37,7 +37,7 @@ export function MapLegend() {
           </div>
         </AccordionTrigger>
 
-        <AccordionContent className="my-1 overflow-hidden rounded-lg bg-white px-3 pb-0">
+        <AccordionContent className="my-1 mb-2 overflow-hidden rounded-lg bg-white px-3 pb-0">
           <Accordion type="single" collapsible>
             <AccordionItem value="item-1">
               <AccordionTrigger>Schrony</AccordionTrigger>
