@@ -18,11 +18,7 @@ import { LayerToggle } from "./toggle";
 
 export function LayersSidebar() {
   return (
-    <Sidebar
-      variant="floating"
-      side="right"
-      className="top-24 right-6 h-fit w-xs"
-    >
+    <Sidebar variant="floating" side="right" className="top-24 right-4 h-fit">
       <SidebarContent className="bg-transparent shadow-lg">
         <SidebarGroup className="bg-transparent">
           <SidebarGroupLabel className="flex gap-2 text-black">

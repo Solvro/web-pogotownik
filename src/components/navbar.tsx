@@ -23,7 +23,7 @@ export function Navbar() {
     <div className="fixed inset-x-0 top-4 z-10 flex items-center justify-center px-2 sm:px-4">
       <div
         className={cn(
-          "relative container mx-auto flex items-center gap-4 rounded-lg bg-white/40 p-4 shadow-lg backdrop-blur-lg duration-300",
+          "relative container mx-auto flex items-center gap-4 rounded-2xl bg-white/40 p-4 shadow-lg backdrop-blur-lg duration-300",
           !isMapPage && scroll.y === 0 && "shadow-transparent",
         )}
       >

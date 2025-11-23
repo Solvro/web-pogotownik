@@ -27,7 +27,7 @@ export function MapLegend() {
       <AccordionItem
         value="legend-trigger"
         className={cn(
-          "sm:right-[unset]sm:left-6 fixed right-4 bottom-12 left-4 z-20 flex max-w-full min-w-xs flex-col rounded-lg bg-white/30 px-4 py-1 shadow-xl backdrop-blur-md sm:w-xs sm:max-w-xs sm:shadow-lg md:bottom-6",
+          "fixed right-4 bottom-12 left-4 z-20 flex max-w-full min-w-xs flex-col rounded-lg bg-white/30 px-4 py-1 shadow-xl backdrop-blur-md sm:right-[unset] sm:left-6 sm:w-xs sm:max-w-xs sm:shadow-lg md:bottom-6",
         )}
       >
         <AccordionTrigger className="mx-1 flex items-center justify-between">
