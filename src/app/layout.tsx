@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
 import type { ReactNode } from "react";
 
+import { Analytics } from "@/components/analytics";
 import { Footer } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
 import { Toaster } from "@/components/ui/sonner";
@@ -47,6 +48,7 @@ export default function RootLayout({
           <Toaster richColors />
           {children}
           <Footer />
+          <Analytics />
         </Providers>
       </body>
     </html>
