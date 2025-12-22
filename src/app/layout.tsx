@@ -6,7 +6,7 @@ import { Analytics } from "@/components/analytics";
 import { Footer } from "@/components/footer";
 import { Navbar } from "@/components/navbar";
 import { Toaster } from "@/components/ui/sonner";
-import { Providers } from "@/lib/providers";
+import { Providers } from "@/lib/providers/providers";
 import { cn } from "@/lib/utils";
 
 import "./globals.css";
@@ -41,7 +41,7 @@ export default function RootLayout({
   children: ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={cn(space_grotesk.variable, "font-sans antialiased")}>
         <Providers>
           <Navbar />

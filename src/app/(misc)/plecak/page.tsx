@@ -70,7 +70,7 @@ export default function BackpackPage() {
       {donePacking ? null : (
         <Alert
           variant="default"
-          className="mt-6 max-w-3xl border-blue-600 bg-blue-50"
+          className="bg-accent mt-6 max-w-3xl border-blue-600"
         >
           <InfoIcon />
           <AlertTitle className="line-clamp-2 text-lg font-semibold text-blue-600">

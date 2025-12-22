@@ -28,7 +28,7 @@ function getClusterSize(pointCount: number) {
 
 function getClusterStyles(size: "small" | "medium" | "large") {
   const baseStyles =
-    "rounded-full border-2 border-white flex items-center justify-center text-white font-bold shadow-lg cursor-pointer hover:scale-110 transition-transform";
+    "rounded-full border-2 border-white dark:border-white/50 flex items-center justify-center text-white font-bold shadow-lg cursor-pointer hover:scale-110 transition-transform";
 
   switch (size) {
     case "small": {

@@ -1,6 +1,7 @@
 "use client";
 
 import GoogleMapReact from "google-map-react";
+import { useTheme } from "next-themes";
 import { useEffect } from "react";
 
 import {
@@ -9,6 +10,7 @@ import {
   SKS_COORDINATES,
 } from "@/config/constants";
 import { LAYER_ICONS } from "@/config/icons";
+import { MAP_STYLES } from "@/config/map-styles";
 import { env } from "@/env";
 import { useClustering } from "@/hooks/use-clustering";
 import { useMap } from "@/hooks/use-map";
@@ -16,6 +18,7 @@ import type { Layer } from "@/lib/enums";
 import { calculateDistance } from "@/lib/helpers/geography";
 import { getCurrentLocation } from "@/lib/helpers/geolocation";
 import { LAYER_FORMATTERS } from "@/lib/layer-formatters";
+import { cn } from "@/lib/utils";
 import type { LabelledMetadata } from "@/types/app";
 
 import { ClusterMarker } from "./cluster-marker";
@@ -53,6 +56,7 @@ export function LayersMap() {
     setIsLoading,
     locations,
   } = useMap();
+  const { resolvedTheme } = useTheme();
 
   const { clusters, supercluster } = useClustering(locations, zoom, bounds, {
     radius: zoom < 12 ? 50 : 30,
@@ -75,10 +79,16 @@ export function LayersMap() {
   }, [setCenter, setIsLoading]);
 
   return (
-    <div className="absolute inset-0 h-screen w-screen">
+    <div
+      className={cn(
+        "absolute inset-0 h-screen w-screen",
+        // google maps info window styles to support dark mode
+        "[&_.gm-style-iw]:!text-black [&_.gm-style-iw-c]:!text-black [&_.gm-style-iw-d]:!text-black [&_.gm-ui-hover-effect]:!opacity-70 [&_.gm-ui-hover-effect_img]:!brightness-0 [&_.gm-ui-hover-effect_span]:!bg-black [&_.gm-ui-hover-effect_svg]:!fill-black [&_.gm-ui-hover-effect_svg_path]:!fill-black [&_.gm-ui-hover-effect:hover]:!opacity-100",
+      )}
+    >
       {isLoading ? (
         <div className="fixed inset-0 z-10 m-auto size-fit">
-          <div className="flex size-10 items-center justify-center rounded-full bg-white/20 backdrop-blur-md">
+          <div className="bg-background/40 flex size-10 items-center justify-center rounded-full backdrop-blur-md">
             <Spinner className="size-6 stroke-3 text-blue-800" />
           </div>
         </div>
@@ -87,7 +97,10 @@ export function LayersMap() {
         bootstrapURLKeys={{ key: env.NEXT_PUBLIC_GOOGLE_MAPS_KEY }}
         defaultCenter={SKS_COORDINATES}
         defaultZoom={DEFAULT_MAP_ZOOM}
-        options={{ fullscreenControl: false }}
+        options={{
+          fullscreenControl: false,
+          styles: resolvedTheme === "dark" ? MAP_STYLES.dark : [],
+        }}
         center={center}
         onChange={(event_) => {
           setCenter(event_.center);

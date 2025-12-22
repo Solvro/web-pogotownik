@@ -21,7 +21,7 @@ export function LayersSidebar() {
     <Sidebar variant="floating" side="right" className="top-24 right-4 h-fit">
       <SidebarContent className="bg-transparent shadow-lg">
         <SidebarGroup className="bg-transparent">
-          <SidebarGroupLabel className="flex gap-2 text-black">
+          <SidebarGroupLabel className="text-foreground flex gap-2">
             Warstwy <Layers size={8} />
           </SidebarGroupLabel>
           <SidebarGroupContent>

@@ -1,5 +1,6 @@
 import GoogleMapReact from "google-map-react";
 import { MapPin } from "lucide-react";
+import { useTheme } from "next-themes";
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
@@ -11,6 +12,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { MAP_STYLES } from "@/config/map-styles";
 import { env } from "@/env";
 
 export function CoordsPicker({
@@ -28,6 +30,8 @@ export function CoordsPicker({
   initialLng: number;
   initialZoom: number;
 }) {
+  const { resolvedTheme } = useTheme();
+
   const [selectedCoords, setSelectedCoords] = useState<{
     lat: number;
     lng: number;
@@ -63,6 +67,7 @@ export function CoordsPicker({
             options={{
               fullscreenControl: false,
               zoomControl: true,
+              styles: resolvedTheme === "dark" ? MAP_STYLES.dark : [],
             }}
           >
             {selectedCoords == null ? null : (
