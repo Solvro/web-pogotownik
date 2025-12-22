@@ -8,6 +8,7 @@ import {
 import { USER_REPORT_ICONS } from "@/config/icons";
 import type { IconElementType, LayerMetadata } from "@/types/app";
 import type { SynchronousReactNode } from "@/types/helpers";
+import { getReportLabel } from "@/utils/get-report-label";
 
 import { Layer } from "./enums";
 import { conjugateNumeric } from "./helpers/polish";
@@ -274,7 +275,7 @@ export const LAYER_FORMATTERS: {
               Zgłoszenie użytkownika
             </DialogTitle>
             <DialogDescription>
-              Rodzaj zgłoszenia: {meta.reportEventType}
+              Rodzaj zgłoszenia: {getReportLabel(meta.reportEventType)}
             </DialogDescription>
           </DialogHeader>
           <div>Opis zgłoszenia: {formatNullableString(meta.description)}</div>

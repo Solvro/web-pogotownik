@@ -39,11 +39,11 @@ export function NavSearch() {
   const [pendingSearch, setPendingSearch] = useState<string | null>(null);
   const pathname = usePathname();
   const segments = pathname.split("/");
-  const firstSegment = segments[1];
+  const isMapPage = segments[1] === "map";
   const router = useRouter();
 
   useEffect(() => {
-    if (firstSegment !== "map" || pendingSearch == null) {
+    if (!isMapPage || pendingSearch == null) {
       return;
     }
 
@@ -57,10 +57,10 @@ export function NavSearch() {
 
     void performSearch(pendingSearch);
     setPendingSearch(null);
-  }, [firstSegment, pendingSearch, setCenter, setZoom]);
+  }, [isMapPage, pendingSearch, setCenter, setZoom]);
 
   function handleSearch() {
-    if (firstSegment !== "map") {
+    if (!isMapPage) {
       router.push("/map");
     }
     if (inputValue.trim()) {
@@ -91,9 +91,11 @@ export function NavSearch() {
           />
         </InputGroup>
       </ButtonGroup>
-      <ButtonGroup>
-        <NavCenterLocation />
-      </ButtonGroup>
+      {isMapPage ? (
+        <ButtonGroup>
+          <NavCenterLocation />
+        </ButtonGroup>
+      ) : null}
     </ButtonGroup>
   );
 }

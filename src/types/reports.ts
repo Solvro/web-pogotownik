@@ -4,5 +4,6 @@ import type { reportsTable } from "../../drizzle/schema";
 import type { Coordinates } from "./app";
 
 export type UserReport = InferSelectModel<typeof reportsTable>;
+export type ReportEventType = UserReport["reportEventType"];
 
 export type UserReportMetadata = Omit<UserReport, "id" | keyof Coordinates>;

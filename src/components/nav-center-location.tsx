@@ -1,6 +1,6 @@
 "use client";
 
-import { Compass } from "lucide-react";
+import { LocateFixed } from "lucide-react";
 import { toast } from "sonner";
 
 import { DEFAULT_MAP_ZOOM } from "@/config/constants";
@@ -32,7 +32,7 @@ export function NavCenterLocation() {
       onClick={handleCenterLocation}
       tooltip="Wycentruj mapę"
     >
-      <Compass />
+      <LocateFixed />
     </Button>
   );
 }
