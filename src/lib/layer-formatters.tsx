@@ -79,6 +79,7 @@ export const LAYER_FORMATTERS: {
         className={cn(
           "flex size-6 items-center justify-center rounded-full border backdrop-blur-md",
           getAirQualityColor(meta),
+          "dark:bg-background/30",
         )}
       >
         <Icon className="size-4" />
@@ -134,6 +135,7 @@ export const LAYER_FORMATTERS: {
         className={cn(
           "flex size-6 items-center justify-center rounded-full border backdrop-blur-md",
           getFireColor(meta),
+          "dark:bg-background/30",
         )}
       >
         <Icon className={"size-4"} />
@@ -159,6 +161,7 @@ export const LAYER_FORMATTERS: {
         className={cn(
           "flex size-6 items-center justify-center rounded-full border backdrop-blur-md",
           getFloodsColor(meta),
+          "dark:bg-background/30",
         )}
       >
         <Icon className={"size-4"} />
@@ -187,6 +190,7 @@ export const LAYER_FORMATTERS: {
         className={cn(
           "flex size-6 items-center justify-center rounded-full border backdrop-blur-md",
           getShelterColor(meta),
+          "dark:bg-background/30",
         )}
       >
         <Icon className={"size-4"} />
@@ -221,7 +225,7 @@ export const LAYER_FORMATTERS: {
   }),
   [Layer.AEDs]: (Icon, meta) => ({
     marker: (
-      <div className="flex size-6 items-center justify-center rounded-full border border-rose-600 bg-rose-100/50 backdrop-blur-md">
+      <div className="dark:bg-background/30 flex size-6 items-center justify-center rounded-full border border-rose-600 bg-rose-100/50 backdrop-blur-md">
         <Icon className={cn("size-4 text-rose-500")} />
       </div>
     ),
@@ -263,7 +267,7 @@ export const LAYER_FORMATTERS: {
     const Icon = USER_REPORT_ICONS[meta.reportEventType] ?? DefaultIcon;
     return {
       marker: (
-        <div className="flex size-6 items-center justify-center rounded-full border border-purple-600 bg-purple-100/50 backdrop-blur-md">
+        <div className="dark:bg-background/30 flex size-6 items-center justify-center rounded-full border border-purple-600 bg-purple-100/50 backdrop-blur-md">
           <Icon className={cn("size-4 text-purple-500")} />
         </div>
       ),

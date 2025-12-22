@@ -8,11 +8,12 @@ import { useWindowScroll } from "react-use";
 import { SidebarTrigger, useSidebar } from "@/components/ui/sidebar";
 import { cn } from "@/lib/utils";
 
+import { ModeToggle } from "./mode-toggle";
 import { NavSearch } from "./nav-search";
 import { ReportDialog } from "./report-form/report-dialog";
 import { AuroraText } from "./ui/aurora-text";
 import { Button } from "./ui/button";
-import { ButtonGroup, ButtonGroupSeparator } from "./ui/button-group";
+import { ButtonGroup } from "./ui/button-group";
 
 export function Navbar() {
   const segment = useSelectedLayoutSegment();
@@ -24,7 +25,7 @@ export function Navbar() {
     <div className="fixed inset-x-0 top-4 z-10 flex items-center justify-center px-2 sm:px-4">
       <div
         className={cn(
-          "relative container mx-auto flex items-center gap-4 rounded-2xl bg-white/40 p-4 shadow-lg backdrop-blur-lg duration-300",
+          "bg-background/40 dark:bg-background/50 dark:border-border/50 relative container mx-auto flex items-center gap-4 rounded-2xl p-4 shadow-lg backdrop-blur-lg duration-300 dark:border",
           !isMapPage && scroll.y === 0 && "shadow-transparent",
         )}
       >
@@ -46,27 +47,24 @@ export function Navbar() {
           <div className="hidden justify-end sm:flex">
             <ButtonGroup>
               {isMapPage ? (
-                <>
-                  <Button
-                    size="icon"
-                    asChild
-                    variant="white"
-                    tooltip={`${sidebar.open ? "Ukryj" : "Pokaż"} warstwy`}
-                  >
-                    <SidebarTrigger side="right" />
-                  </Button>
-                  <ButtonGroupSeparator />
-                </>
+                <Button
+                  size="icon"
+                  asChild
+                  variant="solid"
+                  tooltip={`${sidebar.open ? "Ukryj" : "Pokaż"} warstwy`}
+                >
+                  <SidebarTrigger side="right" />
+                </Button>
               ) : null}
+              <ModeToggle />
               <ReportDialog
                 trigger={
-                  <Button variant="white">
+                  <Button variant="solid">
                     <Megaphone /> Zgłoś
                   </Button>
                 }
               />
-              <ButtonGroupSeparator />
-              <Button variant="white" asChild>
+              <Button variant="solid" asChild>
                 <Link href="/plecak">
                   <Backpack /> Plecak
                 </Link>

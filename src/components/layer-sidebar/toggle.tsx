@@ -34,7 +34,7 @@ export function LayerToggle({
     <Label
       htmlFor={id}
       className={cn(
-        "hover:bg-accent/50 flex items-start gap-3 rounded-lg border bg-white p-3",
+        "hover:bg-accent/75 bg-accent flex items-start gap-3 rounded-lg border p-3 transition",
         {
           "border-blue-600 bg-blue-50 dark:border-blue-900 dark:bg-blue-950":
             checked,

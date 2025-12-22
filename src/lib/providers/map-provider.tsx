@@ -8,18 +8,18 @@ import { DEFAULT_MAP_ZOOM, SKS_COORDINATES } from "@/config/constants";
 import { MapContext } from "@/hooks/use-map";
 import type { LabelledMetadata, LayerFetchFunction } from "@/types/app";
 
-import { Layer } from "./enums";
+import { Layer } from "../enums";
 import {
   getEnabledLayersFromCookie,
   saveEnabledLayersToCookie,
-} from "./helpers/cookies";
-import { typedEntries } from "./helpers/typescript";
-import { getAedsInDistance } from "./services/aed";
-import { getFireReports } from "./services/fires";
-import { getFloodWarnings } from "./services/floods";
-import { getAllReports } from "./services/reports";
-import { getShelters } from "./services/shelters";
-import { getAirQuality } from "./services/smog";
+} from "../helpers/cookies";
+import { typedEntries } from "../helpers/typescript";
+import { getAedsInDistance } from "../services/aed";
+import { getFireReports } from "../services/fires";
+import { getFloodWarnings } from "../services/floods";
+import { getAllReports } from "../services/reports";
+import { getShelters } from "../services/shelters";
+import { getAirQuality } from "../services/smog";
 
 export const LAYER_FETCH_FUNCTIONS: { [L in Layer]: LayerFetchFunction<L> } = {
   [Layer.Smog]: getAirQuality,
