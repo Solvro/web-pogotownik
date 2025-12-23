@@ -25,13 +25,13 @@ export const metadata: Metadata = {
   openGraph: {
     url: PRODUCTION_URL,
     images: {
-      url: "/hero.png",
-      width: 2880,
-      height: 1800,
+      url: "/og-image.png",
+      width: 1200,
+      height: 630,
     },
   },
   twitter: {
-    images: ["/hero.png"],
+    images: ["/og-image.png"],
   },
 };
 
