@@ -4,7 +4,8 @@ import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-import HeroImage from "@/../public/hero.png";
+import HeroImageDark from "@/../public/hero_dark.png";
+import HeroImageLight from "@/../public/hero_light.png";
 import { BorderBeam } from "@/components/magicui/border-beam";
 import { Button } from "@/components/ui/button";
 
@@ -36,12 +37,17 @@ export default function SplashScreen() {
           </Button>
         </div>
         <div className="animate-fade-up relative mt-32 mb-24 opacity-0 [--animation-delay:400ms] perspective-[2000px] after:absolute after:inset-0 after:z-20 after:[background:linear-gradient(to_top,hsl(var(--background))_30%,transparent)]">
-          <div className="bg-opacity-[0.01] before:animate-image-glow rounded-xl border border-white/10 bg-white before:absolute before:top-0 before:bottom-1/2 before:left-0 before:h-full before:w-full before:bg-[linear-gradient(to_bottom,hsl(var(--primary)),hsl(var(--primary)),transparent_40%)] before:opacity-0 before:filter-[blur(180px)]">
+          <div className="bg-opacity-[0.01] before:animate-image-glow border-background/10 rounded-xl border before:absolute before:top-0 before:bottom-1/2 before:left-0 before:h-full before:w-full before:bg-[linear-gradient(to_bottom,hsl(var(--primary)),hsl(var(--primary)),transparent_40%)] before:opacity-0 before:filter-[blur(180px)]">
             <BorderBeam colorFrom="hsl(var(--primary))" />
             <Image
-              src={HeroImage}
-              alt="Hero Image"
-              className="relative h-full w-full rounded-[inherit] border object-contain"
+              src={HeroImageLight}
+              alt="Aplikacja pogotownik - mapa"
+              className="relative block h-full w-full rounded-[inherit] border object-contain dark:hidden"
+            />
+            <Image
+              src={HeroImageDark}
+              alt="Aplikacja pogotownik - mapa"
+              className="relative hidden h-full w-full rounded-[inherit] border object-contain dark:block"
             />
           </div>
         </div>
