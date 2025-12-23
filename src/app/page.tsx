@@ -4,8 +4,8 @@ import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-import HeroImageDark from "@/../public/hero_dark.png";
-import HeroImageLight from "@/../public/hero_light.png";
+import HeroImageDark from "@/assets/hero_dark.png";
+import HeroImageLight from "@/assets/hero_light.png";
 import { BorderBeam } from "@/components/magicui/border-beam";
 import { Button } from "@/components/ui/button";
 
@@ -41,13 +41,13 @@ export default function SplashScreen() {
             <BorderBeam colorFrom="hsl(var(--primary))" />
             <Image
               src={HeroImageLight}
-              alt="Aplikacja pogotownik - mapa"
-              className="relative block h-full w-full rounded-[inherit] border object-contain dark:hidden"
+              alt="Aplikacja pogotownik - mapa - jasny motyw"
+              className="relative h-full w-full rounded-[inherit] border object-contain dark:hidden"
             />
             <Image
               src={HeroImageDark}
-              alt="Aplikacja pogotownik - mapa"
-              className="relative hidden h-full w-full rounded-[inherit] border object-contain dark:block"
+              alt="Aplikacja pogotownik - mapa - ciemny motyw"
+              className="relative h-full w-full rounded-[inherit] border object-contain not-dark:hidden"
             />
           </div>
         </div>
