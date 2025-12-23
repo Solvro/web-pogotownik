@@ -26,8 +26,8 @@ export const metadata: Metadata = {
     url: PRODUCTION_URL,
     images: {
       url: "/og-image.png",
-      width: 2560,
-      height: 1842,
+      width: 1200,
+      height: 630,
     },
   },
   twitter: {
